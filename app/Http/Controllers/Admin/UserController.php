@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -54,8 +55,10 @@ class UserController extends Controller
     }
 
     public function destroy(User $user){
-        $user->delete();
-
+        DB::transaction(function() use($user){
+            $user->transactions()->delete();
+            $user->delete();
+        });
         return back()->with('message', 'Deleted');
     }
 }

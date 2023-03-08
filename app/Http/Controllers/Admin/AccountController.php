@@ -60,7 +60,10 @@ class AccountController extends Controller
     }
 
     public function destroy(Account $account){
-        $account->delete();
+        DB::transaction(function() use($account){
+            $account->transactions()->delete();
+            $account->delete();
+        });
         return redirect()->back();
     }
 }
