@@ -34,8 +34,13 @@ class Account extends Model
     }
 
     public static function generateAccountNumber(){
-        // todo:Fix this to generate 10 numbers only
-        return '445' . rand(100, 999) . substr(time(), 3, 7);
+        $min = pow(10, 9);
+        $max = pow(10, 10) - 1;
+        $number = rand($min, $max);
+        if(self::where('number', $number)->exists()){
+            return self::generateAccountNumber();
+        }
+        return $number;
     }
 
     public function credit(int $amount){

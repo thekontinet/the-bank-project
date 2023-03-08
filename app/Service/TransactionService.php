@@ -99,7 +99,7 @@ class TransactionService
             return;
         }
         $amount = $transaction->amount / 100;
-        $formattedAmount = money($amount, $account->currency);
+        $formattedAmount = money($amount * 100, $account->currency);
         $account->credit($amount);
         $newTransaction =  Transaction::make($account, $amount)
             ->type('transfer.recieve')
