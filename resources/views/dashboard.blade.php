@@ -1,8 +1,8 @@
 <x-app-layout>
     <!--Grid-->
-    <div x-data="dashboard()" class="grid grid-cols-12 gap-6 pt-6 pb-20">
+    <div x-data="dashboard()" class="md:grid grid-cols-12 gap-6 pt-6 pb-20">
         <!--Grid item-->
-        <div class="col-span-full md:col-span-5">
+        <div class="col-span-6 md:col-span-5">
             <x-welcome-card :user='$user' />
         </div>
 

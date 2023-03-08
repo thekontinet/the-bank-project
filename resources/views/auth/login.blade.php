@@ -37,7 +37,7 @@
         <div>
             <x-text-input type='password' placeholder='Password' name='password'>
                 <x-slot name='icon'>
-                    <i class="w-5 h-5 iconify" data-icon="lucide:mail"></i>
+                    <i class="w-5 h-5 iconify" data-icon="lucide:lock"></i>
                 </x-slot>
             </x-text-input>
             <x-input-error :messages="$errors->get('password')" class="mt-2" />

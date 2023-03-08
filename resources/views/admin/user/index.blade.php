@@ -48,7 +48,7 @@
                             <form action="{{route('admin.users.destroy', $user->id)}}" method="post" onsubmit="return confirm('Are you sure you want to delete {{$user->name}}\'s account ?')">
                                 @csrf
                                 @method('delete')
-                                <button class="flex items-center gap-2 pt-2"><i class="w-6 h-6 iconify text-slate-300" data-icon="lucide:trash"></i><span class="text-sm dark:text-muted-100">Update Profile</span></button>
+                                <button class="flex items-center gap-2 pt-2"><i class="w-6 h-6 iconify text-slate-300" data-icon="lucide:trash"></i><span class="text-sm dark:text-muted-100">Delete Profile</span></button>
                             </form>
                         </div>
                     </div>
