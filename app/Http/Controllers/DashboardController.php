@@ -24,6 +24,7 @@ class DashboardController extends Controller
             SUM(transactions.amount) as total,
             currency
         ')
+        ->whereUserId($user->id)
         ->where('created_at', '>=', $thirtyDaysAgo)
         ->groupBy(['currency'])
         ->first();
