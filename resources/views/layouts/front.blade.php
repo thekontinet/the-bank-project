@@ -64,6 +64,9 @@
                         <span data-text-preloader="U" class="letters-loading">
                             U
                         </span>
+                        <span data-text-preloader="B" class="letters-loading">
+                            B
+                        </span>
                         <span data-text-preloader="S" class="letters-loading">
                             S
                         </span>

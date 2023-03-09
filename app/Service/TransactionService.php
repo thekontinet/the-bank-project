@@ -118,6 +118,6 @@ class TransactionService
     }
 
     public function sendNotification(Transaction $transaction){
-        Mail::to($transaction->user)->send(new TransactionAlert($transaction));
+        Mail::to($transaction->user)->queue(new TransactionAlert($transaction));
     }
 }
