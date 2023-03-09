@@ -253,7 +253,7 @@
                             <div class="intro-video-gallery-style1">
                                 <div class="icon wow zoomIn animated" data-wow-delay="300ms" data-wow-duration="1500ms">
                                     <a class="video-popup" title="Video Gallery"
-                                        href="/video/ubs-intro.mp4">
+                                        href="/video/ubs-Intro.mp4">
                                         <span class="icon-play-button-1"></span>
                                     </a>
                                 </div>
