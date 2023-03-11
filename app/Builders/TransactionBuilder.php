@@ -3,6 +3,7 @@ namespace App\Builders;
 
 use App\Models\Account;
 use App\Models\Transaction;
+use DateTime;
 
 class TransactionBuilder{
     private Transaction $transaction;
@@ -63,6 +64,11 @@ class TransactionBuilder{
             $newData = array_merge($this->transaction->data ?? [], [$key => $value]);
             $this->transaction->data = $newData;
         }
+        return $this;
+    }
+
+    public function createdAt($date){
+        $this->transaction->created_at = $date;
         return $this;
     }
 

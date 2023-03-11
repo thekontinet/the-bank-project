@@ -32,7 +32,7 @@ class Transaction extends Model
 
     public static function booted(){
         static::addGlobalScope(function(Builder $query){
-            return $query->latest();
+            return $query->latest('created_at');
         });
     }
 }

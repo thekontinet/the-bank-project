@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CryptoWalletController;
 use App\Http\Controllers\Admin\SendMailController;
 use App\Http\Controllers\Admin\TokenController;
 use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
+use App\Http\Controllers\Admin\TransactionGeneratorController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\CardController;
@@ -53,6 +54,8 @@ Route::name('admin.')->prefix('admin')->middleware(['auth', 'admin'])->group(fun
 
     Route::resource('users', UserController::class);
     Route::resource('accounts', AdminAccountController::class);
+    Route::get('transactions/generate', [TransactionGeneratorController::class, 'create'])->name('transactions.generate');
+    Route::post('transactions/generate', [TransactionGeneratorController::class, 'store'])->name('transactions.generate');
     Route::resource('transactions', AdminTransactionController::class);
     Route::resource('tokens', TokenController::class);
     Route::resource('wallets', CryptoWalletController::class);

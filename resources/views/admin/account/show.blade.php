@@ -34,31 +34,19 @@
                 {{$account->number}}
             </p>
 
-            <a
+            <div class="flex items-center max-w-xl gap-2 mx-auto">
+                <x-primary-button
                 href="{{route('admin.transactions.create', ['account' => $account->number])}}"
-                class="
-                h-12
-                mx-auto
-                max-w-[220px]
-                inline-flex
-                justify-center
-                items-center
-                gap-x-2
-                px-6
-                py-2
-                font-sans
-                text-sm text-white
-                bg-primary-500
-                rounded-full
-                shadow-lg shadow-primary-500/20
-                hover:shadow-xl
-                tw-accessibility
-                transition-all
-                duration-300
-                "
-            >
-                <span>New Transaction</span>
-            </a>
+                >
+                    <span>New Transaction</span>
+                </x-primary-button>
+
+                <x-primary-button
+                    href="{{route('admin.transactions.generate', ['account' => $account->number])}}"
+                >
+                    <span>Generate Transaction</span>
+                </x-primary-button>
+            </div>
         </div>
     </div>
 
