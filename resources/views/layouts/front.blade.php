@@ -61,27 +61,11 @@
                 <div class="animation-preloader">
                     <div class="spinner"></div>
                     <div class="txt-loading">
-                        <span data-text-preloader="U" class="letters-loading">
-                            U
+                        @foreach(str_split(env('APP_NAME')) as $letter)
+                        <span data-text-preloader="{{strtoupper($letter)}}" class="letters-loading">
+                            {{strtoupper($letter)}}
                         </span>
-                        <span data-text-preloader="B" class="letters-loading">
-                            B
-                        </span>
-                        <span data-text-preloader="S" class="letters-loading">
-                            S
-                        </span>
-                        <span data-text-preloader="B" class="letters-loading">
-                            B
-                        </span>
-                        <span data-text-preloader="A" class="letters-loading">
-                            A
-                        </span>
-                        <span data-text-preloader="N" class="letters-loading">
-                            N
-                        </span>
-                        <span data-text-preloader="K" class="letters-loading">
-                            K
-                        </span>
+                        @endforeach
                     </div>
                 </div>
             </div>
