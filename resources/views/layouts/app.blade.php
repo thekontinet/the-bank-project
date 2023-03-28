@@ -30,5 +30,6 @@ x-init="$store.app.isDark = JSON.parse(localStorage.getItem('dark'))"
       @include('layouts.navigation')
     {{$slot}}
     @stack('scripts')
+    @include('layouts.chat')
   </body>
 </html>

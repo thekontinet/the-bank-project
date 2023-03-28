@@ -147,7 +147,7 @@
     <!-- Template js -->
     <script src="/assets/js/custom.js"></script>
 
-
+    @include('layouts.chat')
 </body>
 
 </html>

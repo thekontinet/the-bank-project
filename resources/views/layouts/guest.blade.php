@@ -20,6 +20,6 @@
       <!--End Layout-->
     </main>
 
-
+    @include('layouts.chat')
   </body>
 </html>
