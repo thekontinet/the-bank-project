@@ -29,6 +29,7 @@
                         type="password"
                         size="4"
                         maxlength="4"
+                        minlength="4"
                       />
                       <button
                         type="button"
@@ -1310,4 +1311,6 @@
           </div>
         </div>
     </div>
+
+    <x-transaction-loader limit="80"/>
 </x-app-layout>

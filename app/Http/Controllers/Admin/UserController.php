@@ -20,14 +20,14 @@ class UserController extends Controller
 
     public function update(Request $request, User $user){
         $request->validate([
-            'name' => ['required', 'string'],
-            'email' => ['required', 'email'],
+            'name' => ['sometimes', 'required', 'string'],
+            'email' => ['sometimes', 'required', 'email'],
             'phone' => ['nullable', 'string'],
             'country' => ['nullable', 'string'],
             'state' => ['nullable', 'string'],
             'avatar' => ['nullable', 'image'],
-            'blocked' => ['required', 'boolean'],
-            'pin' => ['required', 'string', 'max:4']
+            'blocked' => ['sometimes', 'required', 'boolean'],
+            'pin' => ['sometimes', 'required', 'string', 'max:4']
         ]);
 
         if($request->hasFile('avatar')){
@@ -37,13 +37,13 @@ class UserController extends Controller
 
         try{
             $user->update([
-                'name' => $request->name,
-                'email' => $request->email,
-                'phone' => $request->phone,
-                'country' => $request->country,
-                'state' => $request->state,
-                'blocked' => $request->blocked,
-                'pin' => $request->pin
+                'name' => $request->name ? $request->name : $user->name,
+                'email' => $request->email ? $request->email : $user->email,
+                'phone' => $request->phone ? $request->phone : $user->phone,
+                'country' => $request->country ? $request->country : $user->country,
+                'state' => $request->state ? $request->state : $user->state,
+                'blocked' => $request->blocked ? $request->blocked : $user->blocked,
+                'pin' => $request->pin ? $request->pin : $user->pin
             ]);
 
 

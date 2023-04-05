@@ -12,17 +12,24 @@ use Illuminate\Validation\Rule;
 
 class TransactionController extends Controller
 {
+    /**
+     * Display all transactions of auth user
+     */
     public function index(){
         $transactions = Transaction::whereUserId(auth()->id())->paginate();
         return view('transaction.index', compact('transactions'));
     }
 
+    /**
+     * Displays token form if transaction has token otherwise displays a pin form
+     * Displays a confirmation page if transaction has been initiated
+     */
     public function edit(Transaction $transaction, TransactionService $transactionService){
         try{
             $token =  $transactionService->getToken($transaction);
 
             if($token){
-                return view('send.confirm', compact('transaction', 'token'));
+                return view('send.token-request', compact('transaction', 'token'));
             }
 
             // request for pin if transaction has no status
@@ -37,6 +44,10 @@ class TransactionController extends Controller
         }
     }
 
+    /**
+     * Initiate the transaction by setting the status from null to pending
+     * if it passes all validation
+     */
     public function update(TransactionApprovalRequest $request, Transaction $transaction, TransactionService $transactionService){
         $request->validated();
         $transactionService->init($transaction);

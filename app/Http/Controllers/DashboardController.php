@@ -10,7 +10,7 @@ use Illuminate\Http\Response;
 class DashboardController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * Display Dashboard Page.
      */
     public function __invoke(Request $request): Response
     {

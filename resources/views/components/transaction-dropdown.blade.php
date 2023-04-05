@@ -1,5 +1,5 @@
 <div x-data="{ isOpen: false }" class="relative flex justify-center whitespace-normal">
-    <button @click="isOpen = true" class="px-2 py-2 mx-auto tracking-wide text-white capitalize transition-colors duration-300 transform rounded-md bg-primary-600 hover:bg-primary-500 focus:outline-none focus:ring focus:ring-primary-300 focus:ring-opacity-80">
+    <button title="transaction settings" @click="isOpen = true" class="px-2 py-2 mx-auto tracking-wide text-white capitalize transition-colors duration-300 transform rounded-md bg-primary-600 hover:bg-primary-500 focus:outline-none focus:ring focus:ring-primary-300 focus:ring-opacity-80" title="admin settings">
         <i class="w-5 h-5 iconify" data-icon="lucide:cog"></i>
     </button>
 

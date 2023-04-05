@@ -82,4 +82,8 @@ class User extends Authenticatable
     public function image(){
         return $this->morphOne(Image::class, 'imageable');
     }
+
+    public function kyc(){
+        return $this->hasOne(UserKyc::class);
+    }
 }

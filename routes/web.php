@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Admin\AccountController as AdminAccountController;
 use App\Http\Controllers\Admin\CryptoWalletController;
+use App\Http\Controllers\Admin\KycController;
 use App\Http\Controllers\Admin\SendMailController;
 use App\Http\Controllers\Admin\TokenController;
 use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\TransferController;
+use App\Http\Controllers\UserKycController;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Route;
 
@@ -42,24 +44,34 @@ Route::middleware(['auth', 'verified', 'blocked'])->group(function () {
 
     Route::resource('accounts', AccountController::class);
     Route::resource('transactions', TransactionController::class);
-    Route::resource('send', TransferController::class);
-    Route::resource('deposit', CryptoDepositController::class);
+    Route::resource('send', TransferController::class)->except('store');
+    Route::resource('send', TransferController::class)->only('store')->middleware('verified.kyc');
+    Route::resource('deposit', CryptoDepositController::class)->except('store');
+    Route::resource('deposit', CryptoDepositController::class)->only('store')->middleware('verified.kyc');
     Route::get('cards', CardController::class);
+    Route::resource('kyc', UserKycController::class)->except(['destory', 'update', 'edit']);
 });
 
 Route::name('admin.')->prefix('admin')->middleware(['auth', 'admin'])->group(function(){
     Route::get('register', [RegisteredUserController::class, 'create'])
-                ->name('register');
+        ->name('register');
     Route::post('register', [RegisteredUserController::class, 'store']);
 
     Route::resource('users', UserController::class);
     Route::resource('accounts', AdminAccountController::class);
-    Route::get('transactions/generate', [TransactionGeneratorController::class, 'create'])->name('transactions.generate');
-    Route::post('transactions/generate', [TransactionGeneratorController::class, 'store'])->name('transactions.generate');
+    Route::get('transactions/generate', [TransactionGeneratorController::class, 'create'])
+        ->name('transactions.generate');
+    Route::post('transactions/generate', [TransactionGeneratorController::class, 'store'])
+        ->name('transactions.generate');
+
+    /**
+     * @TODO: Write test for this routes
+     */
     Route::resource('transactions', AdminTransactionController::class);
     Route::resource('tokens', TokenController::class);
     Route::resource('wallets', CryptoWalletController::class);
     Route::resource('mail', SendMailController::class);
+    Route::resource('kyc', KycController::class);
 });
 
 Route::middleware('auth')->get('chart/transaction', function(){

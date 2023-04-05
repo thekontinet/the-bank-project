@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Account;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,11 @@ class TransactionFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id' => User::factory(),
+            'account_id' => Account::factory(),
+            'currency' => fake()->currencyCode(),
+            'amount' => rand(10000, 100000),
+            'type' => fake()->randomElement(['deposit', 'withdraw']),
         ];
     }
 }

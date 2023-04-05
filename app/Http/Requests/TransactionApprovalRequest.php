@@ -13,6 +13,7 @@ class TransactionApprovalRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        session()->flash('show-loader', true); // This will ensure the fake loader component shows up
         return true;
     }
 
@@ -33,7 +34,7 @@ class TransactionApprovalRequest extends FormRequest
                     ->where('tokenable_id', $transaction->account_id)
                     ->where('status', 0)
             ],
-            'transaction_pin' => ['sometimes', 'required', 'exists:users,pin']
+            'transaction_pin' => ['sometimes', 'required', Rule::exists('users', 'pin')->where('id', auth()->id())]
         ];
     }
 }
