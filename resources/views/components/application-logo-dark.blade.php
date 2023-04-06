@@ -1,6 +1,6 @@
 <a href="/" class="flex items-center gap-2">
     <img
-      src="/img/logo/logo-square-outline.svg"
+      src="/img/logo/logo-square-outline.png"
       class="w-8 h-8 dark:invert"
       alt="App logo"
       width="48"
