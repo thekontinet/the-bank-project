@@ -20,7 +20,8 @@ class UserKyc extends Model
         return $this->save();
     }
 
-    public function unverify(){
+    public function unverify()
+    {
         $this->verified_at = null;
         return $this->save();
     }
