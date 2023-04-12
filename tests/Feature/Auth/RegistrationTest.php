@@ -11,20 +11,21 @@ use function Pest\Laravel\post;
 test('registration screen can not be rendered', function () {
     $response = $this->get('/register');
 
-    $response->assertStatus(404);
+    $response->assertStatus(200);
 });
 
-test('new users can not register', function () {
+test('new users can register', function () {
     $response = $this->post('/register', [
         'name' => 'Test User',
         'email' => 'test@example.com',
         'password' => 'password',
         'password_confirmation' => 'password',
+        'country' => 'usa',
+        'pin' => '1234',
     ]);
 
-    // $this->assertAuthenticated();
-    // $response->assertRedirect(RouteServiceProvider::HOME);
-    $response->assertStatus(404);
+    assertModelExists(User::whereEmail('test@example.com')->first());
+    $response->assertRedirect(RouteServiceProvider::HOME);
 });
 
 test('admin can view registration form', function(){
