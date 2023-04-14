@@ -128,16 +128,16 @@
                                 <li class="nav-item">
                                     <a href="{{route('page', 'contact')}}" class="nav-link">Contact Us</a>
                                 </li>
-                                @if (Route::has('register'))
+                                @if (Route::has('login'))
                                     <li class="nav-item xl-none">
-                                        <a href="{{route('register')}}" class="btn style1">Register Now</a>
+                                        <a href="{{route('login')}}" class="btn style1">Login Now</a>
                                     </li>
                                 @endif
                             </ul>
                             <div class="others-options  lg-none">
                                 <div class="header-btn lg-none">
-                                    @if (Route::has('register'))
-                                        <a href="{{route('register')}}" class="btn style1">Register Now</a>
+                                    @if (Route::has('login'))
+                                        <a href="{{route('login')}}" class="btn style1">Login Now</a>
                                     @endif
                                 </div>
                             </div>
