@@ -12,7 +12,7 @@ class PageController extends Controller
      */
     public function __invoke(Request $request, $page = 'home'): Response
     {
-        $view = 'page.' . $page;
+        $view = theme_path('page.' . $page);
 
         if(!view()->exists($view)){
             abort(404);

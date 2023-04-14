@@ -20,7 +20,7 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        return view(theme_path('auth.register'));
     }
 
     /**
@@ -36,6 +36,7 @@ class RegisteredUserController extends Controller
             'state' => ['nullable', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'pin' => ['required', 'max:4'],
+            'agree' => ['sometimes', 'required', 'max:4'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 

@@ -1,6 +1,17 @@
 <?php
 
 return [
+    /*
+    |--------------------------------------------------------------------------
+    | Theme
+    |--------------------------------------------------------------------------
+    |
+    | This will specify which template to get the view from
+    | you can leave it empty to use the default
+    |
+    */
+
+    'theme' => 'raxa',
 
     /*
     |--------------------------------------------------------------------------
@@ -14,6 +25,7 @@ return [
     */
 
     'paths' => [
+        resource_path('templates'),
         resource_path('views'),
     ],
 

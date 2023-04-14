@@ -33,7 +33,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', PageController::class);
-Route::get('/pages/{page}', PageController::class);
+Route::get('/pages/{page}', PageController::class)->name('page');
 
 
 Route::middleware(['auth', 'verified', 'blocked'])->group(function () {
