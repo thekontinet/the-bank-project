@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{theme_asset('assets/css/style.css')}}">
     <link rel="stylesheet" href="{{theme_asset('assets/css/dark-theme.css')}}">
     <link rel="stylesheet" href="{{theme_asset('assets/css/responsive.css')}}">
-    <link rel="icon" type="image/png" href="{{theme_asset('assets/img/favicon.png')}}">
+    <link rel="icon" type="image/png" href="/img/favicon.svg">
     <title>{{config('app.name')}}</title>
 </head>
 

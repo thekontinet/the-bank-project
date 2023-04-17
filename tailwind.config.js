@@ -18,7 +18,7 @@ module.exports = {
                 sans: ["Figtree", ...defaultTheme.fontFamily.sans],
             },
             colors: {
-                primary: colors.red,
+                primary: colors.cyan,
                 muted: colors.gray,
             },
         },
@@ -28,7 +28,7 @@ module.exports = {
         themes: [
             {
                 mytheme: {
-                    primary: colors.red[400],
+                    primary: colors.cyan[500],
 
                     secondary: "#F000B8",
 
