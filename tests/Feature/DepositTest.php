@@ -19,7 +19,8 @@ beforeEach(function(){
 });
 
 it('can render deposit page', function () {
-    actingAs(User::factory()->create());
+    $account = Account::factory()->create();
+    actingAs($account->user);
     $response = $this->get('/deposit/create');
     $response->assertStatus(200);
 });

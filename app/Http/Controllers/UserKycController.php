@@ -52,7 +52,7 @@ class UserKycController extends Controller
 
         $user->kyc()->save($kyc);
 
-        return back()->with([
+        return to_route('kyc.create')->with([
             'message' => 'done'
         ]);
     }

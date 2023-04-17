@@ -15,8 +15,14 @@ class TransactionController extends Controller
     /**
      * Display all transactions of auth user
      */
-    public function index(){
-        $transactions = Transaction::whereUserId(auth()->id())->paginate();
+    public function index(Request $request){
+        $query = Transaction::whereUserId(auth()->id());
+
+        if($request->account){
+            $query = Account::whereNumber($request->account)->firstOrFail()->transactions();
+        };
+
+        $transactions = $query->paginate();
         return view('transaction.index', compact('transactions'));
     }
 

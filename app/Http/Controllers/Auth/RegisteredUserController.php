@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use PragmaRX\Countries\Package\Countries;
 
 class RegisteredUserController extends Controller
 {
@@ -20,7 +21,9 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view(theme_path('auth.register'));
+        // TODO: Add the country field to view
+        $countries = Countries::all()->pluck('name.common');
+        return view(theme_path('auth.register'), compact('countries'));
     }
 
     /**

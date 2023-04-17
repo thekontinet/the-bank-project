@@ -44,7 +44,7 @@ class TransactionController extends Controller
             'status' => Transaction::STATUS_SUCCESS
         ]);
 
-        return redirect()->route('admin.accounts.show', $account->id)->with('message', 'Transaction successful');
+        return redirect()->route('admin.accounts.show', $account)->with('message', 'Transaction successful');
     }
 
     public function show(Transaction $transaction){

@@ -19,8 +19,8 @@ class DashboardController extends Controller
 
         $thirtyDaysAgo = Carbon::now()->subDays(30);
         $transactionSummary = Transaction::selectRaw('
-            SUM(CASE WHEN transactions.type = "deposit" THEN transactions.amount ELSE 0 END) AS total_deposit,
-            SUM(CASE WHEN transactions.type <> "deposit" THEN transactions.amount ELSE 0 END) AS total_withdrawal,
+            SUM(CASE WHEN transactions.type IN ("deposit", "credit") THEN transactions.amount ELSE 0 END) AS total_deposit,
+            SUM(CASE WHEN transactions.type NOT IN ("deposit", "credit") THEN transactions.amount ELSE 0 END) AS total_withdrawal,
             SUM(transactions.amount) as total,
             currency
         ')

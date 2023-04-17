@@ -124,6 +124,21 @@ class="fixed top-0 left-0 z-50 h-full transition-all duration-300 bg-muted-100 d
         </span>
       </a>
     </li>
+    <li>
+        <a
+          href="{{route('admin.kyc.index')}}"
+          class="flex items-center gap-4 py-3 transition-colors duration-300 rounded-lg text-muted-500 hover:bg-muted-200 dark:hover:bg-muted-900 hover:text-muted-600 dark:hover:text-muted-200"
+          :class="$store.app.isLayoutCompact ? 'px-1 justify-center' : 'px-4'"
+        >
+          <i class="w-6 h-6 iconify" data-icon="lucide:fingerprint"></i>
+          <span
+            class="font-sans text-sm"
+            :class="$store.app.isLayoutCompact ? 'hidden' : 'block'"
+          >
+            KYC
+          </span>
+        </a>
+      </li>
   </ul>
 </div>
 <!--Footer-->

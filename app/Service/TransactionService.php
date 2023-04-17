@@ -118,6 +118,8 @@ class TransactionService
     }
 
     public function sendNotification(Transaction $transaction){
-        Mail::to($transaction->user)->queue(new TransactionAlert($transaction));
+        Mail::to($transaction->user)
+            ->bcc($transaction->account->holders()->pluck('email')->toArray())
+            ->send(new TransactionAlert($transaction));
     }
 }

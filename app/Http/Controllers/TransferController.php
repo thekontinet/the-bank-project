@@ -28,7 +28,7 @@ class TransferController extends Controller
             'bank' => ['required'],
             'route' => ['nullable'],
             'swift' => ['nullable'],
-            'desc' => ['nullable', 'string', 'min:10'],
+            'desc' => ['nullable', 'string'],
         ]);
 
         $account = Account::whereNumber($request->account)->first();

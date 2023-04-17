@@ -8,6 +8,7 @@
             <h4 class="text-sm font-semibold uppercase font-heading text-muted-400">
                 Account Balance
             </h4>
+            <p class="font-sans text-sm font-medium text-muted-800 dark:text-white -mt-3">{{$account->number}}</p>
             <p class="first-letter:text-xl first-letter:inline-block first-letter:mr-2">
                 <span class="font-sans text-4xl font-medium text-muted-800 dark:text-white">@money($account->balance, $account->currency)</span>
             </p>

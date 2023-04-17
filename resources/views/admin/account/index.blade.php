@@ -68,13 +68,13 @@
                                                 x-transition:leave-end="opacity-0 scale-90"
                                                 class="absolute right-0 z-20 w-48 py-2 mt-2 origin-top-right bg-white rounded-md shadow-xl dark:bg-muted-800"
                                             >
-                                                <a href="{{route('admin.accounts.show', $account->id)}}" class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-white hover:bg-gray-100 dark:hover:bg-muted-700 dark:hover:text-white">
+                                                <a href="{{route('admin.accounts.show', $account)}}" class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-white hover:bg-gray-100 dark:hover:bg-muted-700 dark:hover:text-white">
                                                     View
                                                 </a>
                                                 <button form='account-delete-{{$account->id}}' class="block w-full px-4 py-3 text-sm text-left text-gray-600 capitalize transition-colors duration-300 transform dark:text-white hover:bg-gray-100 dark:hover:bg-muted-700 dark:hover:text-white">
                                                     Delete
                                                 </button>
-                                                <form onsubmit="confirm('Are you sure you want to delete this account ?')" action="{{route('admin.accounts.destroy', $account->id)}}" method="post" id='account-delete-{{$account->id}}'>
+                                                <form onsubmit="confirm('Are you sure you want to delete this account ?')" action="{{route('admin.accounts.destroy', $account)}}" method="post" id='account-delete-{{$account->id}}'>
                                                     @csrf
                                                     @method('delete')
                                                 </form>

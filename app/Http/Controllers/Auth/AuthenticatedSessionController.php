@@ -26,8 +26,9 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        Log::info('Loggin account', ['user_id' => auth()->id()]);
         $request->authenticate();
+
+        Log::info('account login', ['user_id' => auth()->id()]);
 
         $request->session()->regenerate();
 

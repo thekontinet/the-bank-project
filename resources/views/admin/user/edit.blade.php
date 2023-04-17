@@ -1,102 +1,93 @@
 <x-admin-layout>
-<div class="col-span-12 md:col-span-5">
-    <!--Welcome widget-->
-    <div
-        class="h-full p-10 bg-white border shadow-xl dark:bg-muted-1000 rounded-xl border-muted-200 dark:border-muted-800 shadow-muted-400/10 dark:shadow-muted-800/10"
-    >
-        <div>
-            <h3 class="mb-4 text-2xl font-semibold dark:text-muted-200">Edit User Information</h3>
-            <form class="grid gap-3 md:grid-cols-2" action="{{route('admin.users.update', $user->id)}}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('put')
+<div class="pt-10 pb-4" x-data>
+    <header class="flex justify-between items-center">
+        <h4 class="text-lg font-semibold">Update User Info</h4>
+        <button class="btn btn-sm" onclick="document.forms['update-form'].submit()">Save</button>
+    </header>
 
-                <div class="flex flex-col items-center text-center md:col-span-2">
-                    <div x-data="{ imagePreview: '', fileInput: null }">
-                        <input name="avatar" type="file" class="hidden" x-ref="fileInput" @change="imagePreview = URL.createObjectURL($event.target.files[0])">
-                        <div class="relative">
-                            <button type="button" class="px-4 py-2 rounded" @click="$refs.fileInput.click()">
-                                <img :src="imagePreview ? imagePreview : '{{$user->avatar}}'" class="object-cover w-24 h-24 rounded-full">
-                            </button>
-                        </div>
-                        <x-primary-button x-show="imagePreview" class="mx-auto">Save</x-primary-button>
-                    </div>
-                </div>
+    <form name="update-form" class="space-y-4" action="{{route('admin.users.update', $user->id)}}" method="POST" enctype="multipart/form-data">
+        @csrf
+        @method('put')
 
-                <!-- Field -->
-                <div class="md:col-span-2">
-                    <x-text-input name='name' type='text' placeholder="Name" value="{{$user->name}}">
-                    <x-slot name='icon'>
-                        <i class="w-5 h-5 iconify" data-icon="lucide:user"></i>
-                    </x-slot>
-                    </x-text-input>
-                    <x-input-error :messages="$errors->get('name')" class="mt-2" />
+        <div class="flex justify-between items-center">
+            <div x-data="{ imagePreview: '', fileInput: null }">
+                <input name="avatar" type="file" class="hidden" x-ref="fileInput" @change="imagePreview = URL.createObjectURL($event.target.files[0])">
+                <div class="relative">
+                    <button type="button" class="py-2 rounded" @click="$refs.fileInput.click()">
+                        <img :src="imagePreview ? imagePreview : '{{$user->avatar}}'" class="w-16 h-16 object-cover rounded-full">
+                    </button>
                 </div>
+                <x-primary-button x-show="imagePreview" class="mx-auto">Save</x-primary-button>
+            </div>
 
-                <!-- Field -->
-                <div>
-                    <x-text-input name='email' type='email' placeholder="Email" value="{{$user->email}}">
-                    <x-slot name='icon'>
-                        <i class="w-5 h-5 iconify" data-icon="lucide:mail"></i>
-                    </x-slot>
-                    </x-text-input>
-                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <div class="form-group border border-primary-500 rounded-full p-3">
+                <div class="flex items-center gap-2">
+                    <input type="checkbox" name='blocked' id="blocked" value="1" {{$user->blocked ? 'checked': ''}} class="checkbox" />
+                    <label class="text-sm" for="blocked">Block account</label>
                 </div>
-
-                <!-- Field -->
-                <div>
-                    <x-text-input name='phone' type='tel' placeholder="+1 *** ***" value="{{$user->phone}}">
-                    <x-slot name='icon'>
-                        <i class="w-5 h-5 iconify" data-icon="lucide:phone"></i>
-                    </x-slot>
-                    </x-text-input>
-                    <x-input-error :messages="$errors->get('phone')" class="mt-2" />
-                </div>
-
-                <!-- Field -->
-                <div>
-                    <x-text-input name='country' type='text' placeholder="Country" value="{{$user->country}}">
-                    <x-slot name='icon'>
-                        <i class="w-5 h-5 iconify" data-icon="lucide:globe"></i>
-                    </x-slot>
-                    </x-text-input>
-                    <x-input-error :messages="$errors->get('country')" class="mt-2" />
-                </div>
-
-                <!-- Field -->
-                <div>
-                    <x-text-input name='state' type='text' placeholder="State" value="{{$user->state}}">
-                    <x-slot name='icon'>
-                        <i class="w-5 h-5 iconify" data-icon="lucide:map"></i>
-                    </x-slot>
-                    </x-text-input>
-                    <x-input-error :messages="$errors->get('state')" class="mt-2" />
-                </div>
-
-                <!-- Field -->
-                <div>
-                    <x-text-input name='pin' type='text' placeholder="Pin" value="{{$user->pin}}">
-                    <x-slot name='icon'>
-                        <i class="w-5 h-5 iconify" data-icon="lucide:key"></i>
-                    </x-slot>
-                    </x-text-input>
-                    <x-input-error :messages="$errors->get('pin')" class="mt-2" />
-                </div>
-
-                <!-- Select -->
-                <div>
-                    <select name='blocked' type='text' class="w-full rounded-md">
-                        <option value="0" {{$user->blocked ? '' : 'selected'}}>No</option>
-                        <option value="1" {{!$user->blocked ? '' : 'selected'}}>Yes</option>
-                    </select>
-                    <x-input-error :messages="$errors->get('blocked')" class="mt-2" />
-                </div>
-
-                <div class="md:col-span-2">
-                    <x-primary-button>Update</x-primary-button>
-                </div>
-            </form>
+                @error('blocked')
+                    <span class="text-red-500 text-xs">{{$message}}</span>
+                @enderror
+            </div>
         </div>
-    </div>
-</div>
 
+
+        <div class="col-span-10 space-y-4">
+            <div class="form-group">
+                <label class="form-label" for="name">Fullname</label>
+                <input type="text" name="name" placeholder="Enter User Name" value="{{old('name', $user->name)}}" class="input input-bordered w-full">
+                @error('name')
+                    <span class="text-red-500">{{$message}}</span>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="email">Email</label>
+                <input type="email" name="email" placeholder="Email Address" value="{{old('email', $user->email)}}" class="input input-bordered w-full">
+                @error('email')
+                    <span class="text-red-500">{{$message}}</span>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="phone">Phone</label>
+                <input type="tel" name="phone" placeholder="Phone Number" value="{{old('phone', $user->phone)}}" class="input input-bordered w-full">
+                @error('phone')
+                    <span class="text-red-500">{{$message}}</span>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="country">Country</label>
+                <input list="country" name="country" placeholder="Country" value="{{old('country', $user->country)}}" class="input input-bordered w-full">
+                <datalist id="country">
+                    @foreach (getCountries() as $country)
+                        <option value="{{$country}}"/>
+                    @endforeach
+                </datalist>
+                @error('country')
+                    <span class="text-red-500">{{$message}}</span>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="state">State</label>
+                <input type="text" name="state" placeholder="state/Province" value="{{old('state', $user->state)}}" class="input input-bordered w-full">
+                @error('state')
+                    <span class="text-red-500">{{$message}}</span>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="pin">4 Digit Pin</label>
+                <input type="text" name="pin" placeholder="Transaction Pin" minlength="4" maxlength="4" value="{{old('pin', $user->pin)}}" class="input input-bordered w-full">
+                @error('pin')
+                    <span class="text-red-500">{{$message}}</span>
+                @enderror
+            </div>
+
+            <button class="btn btn-primary">Update User Profile</button>
+        </div>
+    </form>
+</div>
 </x-admin-layout>

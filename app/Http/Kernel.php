@@ -53,6 +53,7 @@ class Kernel extends HttpKernel
      * @var array<string, class-string|string>
      */
     protected $middlewareAliases = [
+        'has_account' => \App\Http\Middleware\MustHaveABankAccount::class,
         'admin' => \App\Http\Middleware\IsAdmin::class,
         'blocked' => \App\Http\Middleware\BlockedMiddleware::class,
         'auth' => \App\Http\Middleware\Authenticate::class,

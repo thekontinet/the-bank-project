@@ -1,12 +1,15 @@
 <?php
 
+use App\Models\Account;
 use App\Models\User;
 
+use function Pest\Laravel\actingAs;
+
 test('can render dashboard', function () {
-    $user = User::factory()->create();
-    $this->actingAs($user);
+    $account = Account::factory()->create();
+    actingAs($account->user);
     $response = $this->get('/dashboard');
     $response->assertStatus(200);
     $response->assertSeeText('Recent Transactions');
-    $response->assertSeeText($user->firstname);
+    $response->assertSeeText($account->firstname);
 });

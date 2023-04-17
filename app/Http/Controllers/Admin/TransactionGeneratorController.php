@@ -57,7 +57,7 @@ class TransactionGeneratorController extends Controller
             $transaction->save();
         }
 
-        return redirect()->route('admin.accounts.show', $account->id)->with('message', 'Transaction generated successfully');
+        return redirect()->route('admin.accounts.show', $account)->with('message', 'Transaction generated successfully');
     }
 
     private function getBankNames(){

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AccountHoldersController;
 use App\Http\Controllers\Admin\AccountController as AdminAccountController;
 use App\Http\Controllers\Admin\CryptoWalletController;
 use App\Http\Controllers\Admin\KycController;
@@ -37,18 +38,22 @@ Route::get('/pages/{page}', PageController::class)->name('page');
 
 
 Route::middleware(['auth', 'verified', 'blocked'])->group(function () {
-    Route::get('/dashboard', DashboardController::class)->name('dashboard');
+    Route::resource('accounts', AccountController::class)->withoutMiddleware('has_account');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('accounts', AccountController::class);
-    Route::resource('transactions', TransactionController::class);
-    Route::resource('send', TransferController::class)->except('store');
-    Route::resource('send', TransferController::class)->only('store')->middleware('verified.kyc');
-    Route::resource('deposit', CryptoDepositController::class)->except('store');
-    Route::resource('deposit', CryptoDepositController::class)->only('store')->middleware('verified.kyc');
-    Route::get('cards', CardController::class);
+    Route::middleware(['has_account'])->group(function () {
+        Route::get('/dashboard', DashboardController::class)->name('dashboard');
+        Route::resource('accounts/holders', AccountHoldersController::class)->parameters(['holders' => 'account']);
+        Route::resource('transactions', TransactionController::class);
+        Route::resource('send', TransferController::class)->except('store');
+        Route::resource('send', TransferController::class)->only('store')->middleware('verified.kyc');
+        Route::resource('deposit', CryptoDepositController::class)->except('store');
+        Route::resource('deposit', CryptoDepositController::class)->only('store')->middleware('verified.kyc');
+        Route::get('cards', CardController::class);
+    });
+
     Route::resource('kyc', UserKycController::class)->except(['destory', 'update', 'edit']);
 });
 

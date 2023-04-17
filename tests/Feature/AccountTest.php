@@ -20,9 +20,8 @@ it('can render all users accounts', function () {
 });
 
 it('cannot render another users account in list', function () {
-    $account1 = Account::factory()->for(User::factory())->create();
-    $account2 = Account::factory()->for(User::factory())->create();
-
+    $account1 = Account::factory()->create();
+    $account2 = Account::factory()->create();
     actingAs($account1->user);
 
     $response = get('/accounts');
@@ -32,22 +31,23 @@ it('cannot render another users account in list', function () {
     $response->assertDontSeeText($account2->short_number);
 });
 
-it('can render an accounts', function () {
-    $account = Account::factory()->for(User::factory())->create();
+it('can show an account', function () {
+    $account = Account::factory()->create();
     actingAs($account->user);
-    $response = get('/accounts/' . $account->id);
+    $response = get(route('accounts.show', $account));
 
     $response->assertStatus(200);
     $response->assertSee($account->name);
     $response->assertSee($account->number);
 });
 
-it('cannot render another users account', function () {
-    $account1 = Account::factory()->for(User::factory())->create();
-    $account2 = Account::factory()->for(User::factory())->create();
+it('cannot show another users account', function () {
+    $account1 = Account::factory()->create();
+    $account2 = Account::factory()->create();
     actingAs($account1->user);
-    $response = get('/accounts/' . $account2->id);
 
-    $response->assertStatus(403);
+    $response = get(route('accounts.show', $account2));
+
+    $response->assertStatus(404);
 });
 

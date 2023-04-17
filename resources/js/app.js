@@ -55,4 +55,22 @@ document.addEventListener('alpine:init', () => {
             });
         }
     }));
+
+    window.Alpine.data('accountForm', () => ({
+        sole: false,
+        email: '',
+        emails: [],
+        max: 3,
+        addEmail(email){
+            const isEmail = email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)
+            const isMax = this.emails.length >= this.max
+            if(!this.emails.includes(email) && email.trim().length && isEmail && !isMax){
+                this.emails.push(email)
+            }
+            this.email = ''
+        },
+        removeEmail(email){
+            this.emails = this.emails.filter(_email => _email != email)
+        }
+    }))
 })

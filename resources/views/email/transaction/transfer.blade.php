@@ -1,4 +1,6 @@
 <x-mail::message>
+<h4 style="text-align: center">Transaction Alert</h4>
+
 @if ($transaction->type === 'transfer.send')
 A total amount of <strong>@money($transaction->amount, $transaction->currency)</strong> has been debited and transfered from your account.
 <br>

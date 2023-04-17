@@ -59,6 +59,20 @@ class AccountController extends Controller
         return view('admin.account.show', compact('account', 'user'));
     }
 
+    /**
+     * Update to joint account
+     */
+    public function update(Account $account){
+        $account->is_joint = !$account->isJoint();
+        $account->save();
+
+        if(!$account->isJoint()){
+            $account->removeHolders();
+        }
+        return to_route('admin.accounts.show', $account)
+            ->with(['message' => $account->isJoint() ? 'Activated' : 'Deactivated']);
+    }
+
     public function destroy(Account $account){
         DB::transaction(function() use($account){
             $account->transactions()->delete();

@@ -17,8 +17,8 @@ use function PHPUnit\Framework\assertTrue;
 uses(RefreshDatabase::class);
 
 test('it can render user transaction', function () {
-    $user = User::factory()->create();
-    actingAs($user);
+    $account = Account::factory()->create();
+    actingAs($account->user);
 
     $response = $this->get('/transactions');
 
@@ -26,24 +26,21 @@ test('it can render user transaction', function () {
 });
 
 it('users cannot see the transaction admin settings icon', function () {
-    $user = User::factory()->create(['is_admin' => false]);
+    $user = User::factory()->admin()->create();
     actingAs($user);
 
-    $response = get('/transactions');
+    $response = get(route('admin.transactions.index'));
 
     $response->assertStatus(200);
     $response->assertDontSee('transaction settings');
 });
 
 it('admin can see the transaction admin settings icon', function () {
-    $transaction = Transaction::factory()
-        ->for(Account::factory())
-        ->for(User::factory(['is_admin' => true]))
-        ->create();
+    $user = User::factory()->admin()->create();
+    Transaction::factory(10)->create();
+    actingAs($user);
 
-    actingAs($transaction->user);
-
-    $response = get('/transactions');
+    $response = get(route('admin.transactions.index'));
 
     $response->assertStatus(200);
     $response->assertSee('transaction settings');

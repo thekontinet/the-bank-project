@@ -29,6 +29,25 @@
             </div>
         </div>
 
+        @if($account->isJoint())
+        <div class="card bg-white/50 my-4 border p-3">
+            <div class="card-title">
+                <h4 class="text-lg p-4">Account Holders</h4>
+            </div>
+            <ul>
+                @foreach ($account->holders as $holder)
+                <li class="border-b px-4 py-5 flex gap-2">
+                    <img class="avatar w-10 h-10 mr-2 rounded-full" src="{{$holder->avatar}}" alt="">
+                    <p>
+                        <span class="font-medium block">{{$holder->name}}</span>
+                        <span class="text-xs block">{{$holder->email}}</span>
+                    </p>
+                </li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+
         <div class="mt-5">
             <header class="flex items-center justify-between py-4">
                 <h4 class="text-lg font-bold dark:text-muted-100">Transaction History</h4>

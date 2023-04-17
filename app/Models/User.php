@@ -73,7 +73,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function accounts(){
-        return $this->hasMany(Account::class);
+        return $this->belongsToMany(Account::class, 'account_holders');
     }
 
     public function transactions(){

@@ -35,6 +35,15 @@
             </p>
 
             <div class="flex items-center max-w-xl gap-2 mx-auto">
+                <form action="{{route('admin.accounts.update', $account)}}" method="post" onsubmit="return confirm('This action will affect holders on this account. Are you sure you want to proceed ?')">
+                    @csrf
+                    @method('put')
+                    @if ($account->is_joint)
+                        <x-primary-button>Deactive Joint Account</x-primary-button>
+                        @else
+                        <x-secondary-button>Activate Joint Account</x-secondary-button>
+                    @endif
+                </form>
                 <x-primary-button
                 href="{{route('admin.transactions.create', ['account' => $account->number])}}"
                 >
@@ -49,6 +58,34 @@
             </div>
         </div>
     </div>
+
+    @if($account->isJoint())
+        <div class="card bg-white/50 my-4 border p-3">
+            <div class="card-title justify-between">
+                <h4 class="text-lg p-4">Account Holders</h4>
+                <a class="btn btn-sm" href="{{route('holders.edit', $account)}}">Add Holder</a>
+            </div>
+            <ul>
+                @foreach ($account->holders as $holder)
+                <li class="border-b px-4 py-5 flex gap-2">
+                    <img class="avatar w-10 h-10 mr-2 rounded-full" src="{{$holder->avatar}}" alt="">
+                    <p>
+                        <span class="font-medium block">{{$holder->name}}</span>
+                        <span class="text-xs block">{{$holder->email}}</span>
+                    </p>
+                    @if ($holder->id != $account->user_id)
+                    <form class="ml-auto" action="{{route('holders.destroy', $account)}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-sm">X</button>
+                        <input type="hidden" name="email" value="{{$holder->email}}">
+                    </form>
+                    @endif
+                </li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
 
     <div class="mt-5">
         <header class="py-4">
