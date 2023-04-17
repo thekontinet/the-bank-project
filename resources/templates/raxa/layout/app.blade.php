@@ -5,7 +5,6 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <link rel="stylesheet" href="{{theme_asset('assets/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{theme_asset('assets/css/flaticon.css')}}">
     <link rel="stylesheet" href="{{theme_asset('assets/css/remixicon.css')}}">
@@ -16,8 +15,8 @@
     <link rel="stylesheet" href="{{theme_asset('assets/css/style.css')}}">
     <link rel="stylesheet" href="{{theme_asset('assets/css/dark-theme.css')}}">
     <link rel="stylesheet" href="{{theme_asset('assets/css/responsive.css')}}">
-    <title>Raxa - Money Transfer & Banking HTML Template</title>
     <link rel="icon" type="image/png" href="{{theme_asset('assets/img/favicon.png')}}">
+    <title>{{config('app.name')}}</title>
 </head>
 
 <body>

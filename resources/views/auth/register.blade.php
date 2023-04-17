@@ -44,11 +44,16 @@
             </div>
             <!--Field-->
             <div>
-                <x-text-input type='text' placeholder='Country' name='country' value="{{old('country')}}">
+                <x-text-input list='country' placeholder='Country' name='countrys' value="{{old('country')}}">
                     <x-slot name='icon'>
                         <i class="w-5 h-5 iconify" data-icon="lucide:globe"></i>
                     </x-slot>
                 </x-text-input>
+                <datalist id="country">
+                    @foreach (getCountries() as $country)
+                        <option value="{{$country}}">
+                    @endforeach
+                </datalist>
                 <x-input-error :messages="$errors->get('country')" class="mt-2" />
             </div>
             <!--Field-->

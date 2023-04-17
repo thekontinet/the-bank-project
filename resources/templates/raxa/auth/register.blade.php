@@ -104,12 +104,16 @@
                       <div class="col-lg-12">
                         <div class="form-group">
                           <input
-                            id="country"
                             name="country"
-                            type="text"
+                            list="country"
                             placeholder="Country"
                             class="is-invalid"
                           />
+                          <datalist id="country">
+                            @foreach (getCountries() as $country)
+                                <option value="{{$country}}">
+                            @endforeach
+                          </datalist>
                           @error('country')
                           <span class="invalid-feedback">{{$message}}</span>
                           @enderror
