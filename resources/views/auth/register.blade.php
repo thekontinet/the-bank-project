@@ -44,7 +44,7 @@
             </div>
             <!--Field-->
             <div>
-                <x-text-input list='country' placeholder='Country' name='countrys' value="{{old('country')}}">
+                <x-text-input list='country' placeholder='Country' name='country' value="{{old('country')}}">
                     <x-slot name='icon'>
                         <i class="w-5 h-5 iconify" data-icon="lucide:globe"></i>
                     </x-slot>
