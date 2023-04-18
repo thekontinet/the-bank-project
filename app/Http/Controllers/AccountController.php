@@ -46,7 +46,7 @@ class AccountController extends Controller
      * Display single account of auth user
      */
     public function show(Account $account){
-        abort_if($account->user_id !== auth()->id(), 403);
+        abort_if($account->user_id != auth()->id(), 403);
         return view('account.show', compact('account'));
     }
 }
