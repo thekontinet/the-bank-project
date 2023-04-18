@@ -1,4 +1,5 @@
 <x-guest-layout>
+    <x-alert/>
     <div
         class="w-full min-h-screen grid place-items-center pb-4 bg-gradient-to-r from-primary-500 via-primary-700 to-primary-900">
         <div class="bg-white rounded-lg shadow-md w-full p-10 max-w-xl mx-auto">
