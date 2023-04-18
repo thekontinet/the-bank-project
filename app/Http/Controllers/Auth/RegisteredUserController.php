@@ -54,10 +54,7 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        // TODO: This is suppose to check if user is admin
-        if($request->user() && $request->user()->hasAdminRole()){
-            return redirect()->route('admin.users.index');
-        }
+        Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME);
     }
