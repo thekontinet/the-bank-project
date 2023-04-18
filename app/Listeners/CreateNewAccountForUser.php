@@ -23,13 +23,13 @@ class CreateNewAccountForUser
      */
     public function handle(Registered $event): void
     {
-        try{
-            $user = User::findOrFail($event->user->id);
-            Account::make($user, Account::TYPE_SAVINGS);
-        }
-        catch(\Exception $e){
-            $user->delete();
-            throw $e;
-        }
+        // try{
+        //     $user = User::findOrFail($event->user->id);
+        //     Account::make($user, Account::TYPE_SAVINGS);
+        // }
+        // catch(\Exception $e){
+        //     $user->delete();
+        //     throw $e;
+        // }
     }
 }
