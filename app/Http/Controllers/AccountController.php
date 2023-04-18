@@ -31,10 +31,6 @@ class AccountController extends Controller
         $user = auth()->user();
         $account = Account::make($user, $request->type, $request->currency, $request->is_joint);
 
-        if($request->is_joint){
-            return to_route('holders.edit', $account->number);
-        }
-
         return to_route('accounts.show', $account)->with(['message' => 'Account created successfully']);
     }
 
