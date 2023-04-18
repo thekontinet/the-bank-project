@@ -45,7 +45,7 @@ Route::middleware(['auth', 'verified', 'blocked'])->group(function () {
 
     Route::middleware(['has_account'])->group(function () {
         Route::get('/dashboard', DashboardController::class)->name('dashboard');
-        Route::resource('accounts/holders', AccountHoldersController::class)->parameters(['holders' => 'account']);
+        Route::resource('account/holders', AccountHoldersController::class)->parameters(['holders' => 'account']);
         Route::resource('transactions', TransactionController::class);
         Route::resource('send', TransferController::class)->except('store');
         Route::resource('send', TransferController::class)->only('store')->middleware('verified.kyc');
