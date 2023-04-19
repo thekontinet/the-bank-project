@@ -40,10 +40,17 @@
                     <span class="text-xs absolute mt-[70px]">Settings</span>
                 </a>
 
+                @if (!auth()->user()->hasAdminRole())
                 <a href="{{route('kyc.create')}}" class="mx-auto bg-primary-300 rounded-full w-14 h-14 grid place-items-center hover:bg-primary-500 group">
                     <span class="iconify w-6 h-6 group-hover:text-primary-300 text-primary-500" data-icon='lucide:user-check'></span>
                     <span class="text-xs absolute mt-[70px]">KYC Status</span>
                 </a>
+                @else
+                <a href="{{route('admin.users.index')}}" class="mx-auto bg-primary-300 rounded-full w-14 h-14 grid place-items-center hover:bg-primary-500 group">
+                    <span class="iconify w-6 h-6 group-hover:text-primary-300 text-primary-500" data-icon='lucide:user-cog'></span>
+                    <span class="text-xs absolute mt-[70px]">Admin Panel</span>
+                </a>
+                @endif
             </div>
         </div>
 
