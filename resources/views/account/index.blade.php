@@ -8,7 +8,7 @@
             <a class="btn btn-sm btn-primary" href="{{route('accounts.create')}}">New Account</a>
         </div>
 
-        <div class="grid md:grid-cols-3">
+        <div class="grid md:grid-cols-3 mb:gap-2">
         @forelse ($accounts as $account)
              <x-account-card :account="$account" :href="route('accounts.show', $account)"/>
              @empty

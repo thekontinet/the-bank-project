@@ -19,12 +19,18 @@ class AccountService
     }
 
     public static function generateAccountNumber(){
-        $min = pow(10, 9);
-        $max = abs(pow(10, 10) - 1);
-        $number = rand($min, $max);
-        if(Account::where('number', $number)->exists()){
-            return self::generateAccountNumber();
+        $accountNumber = null;
+
+        while(!$accountNumber){
+            $number = mt_rand(1000000000, 9999999999);
+
+            $exists = Account::where('number', $number)->exists();
+
+            if(!$exists){
+                $accountNumber = $number;
+            }
         }
-        return abs($number);
+
+        return $accountNumber;
     }
 }
