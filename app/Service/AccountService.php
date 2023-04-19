@@ -25,6 +25,6 @@ class AccountService
         if(Account::where('number', $number)->exists()){
             return self::generateAccountNumber();
         }
-        return $number;
+        return abs($number);
     }
 }
