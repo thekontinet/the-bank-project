@@ -20,7 +20,7 @@ class AccountService
 
     public static function generateAccountNumber(){
         $min = pow(10, 9);
-        $max = pow(10, 10) - 1;
+        $max = abs(pow(10, 10) - 1);
         $number = rand($min, $max);
         if(Account::where('number', $number)->exists()){
             return self::generateAccountNumber();
