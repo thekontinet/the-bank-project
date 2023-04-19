@@ -19,6 +19,6 @@ class DatabaseSeeder extends Seeder
             'pin' => '1234'
         ]);
 
-        \App\Models\User::factory(5)->create();
+        // \App\Models\User::factory(5)->create();
     }
 }
