@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\createAccountRequest;
 use App\Models\Account;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -10,30 +11,6 @@ use Illuminate\Validation\Rule;
 
 class AccountController extends Controller
 {
-    /**
-     * Create Bank account form
-     */
-    public function create(){
-        return view(theme_path('account.create'));
-    }
-
-    /**
-     * Save Bank Account
-     */
-    public function store(Request $request){
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'type' => ['required', Rule::in(Account::TYPES)],
-            'currency' => ['required', Rule::in(array_keys(config('money')))],
-            'is_joint' => ['boolean']
-        ]);
-
-        $user = auth()->user();
-        $account = Account::make($user, $request->type, $request->currency, $request->is_joint);
-
-        return to_route('dashboard')->with(['message' => 'Account created successfully']);
-    }
-
     /**
      * Display all accounts of auth user
      */

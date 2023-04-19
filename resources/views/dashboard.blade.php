@@ -2,13 +2,49 @@
     <!--Grid-->
     <div x-data="dashboard()" class="grid grid-cols-12 gap-6 pt-6 pb-20">
         <!--Grid item-->
-        <div class="col-span-12 md:col-span-5">
-            <x-welcome-card :user='$user' />
+        <div class="col-span-12">
+            <x-balance-summary-card :account="$user->accounts()->first()" :hasChart="($transactions->count() > 2)"/>
         </div>
 
-        <!--Grid item-->
-        <div class="col-span-12 md:col-span-7">
-            <x-balance-summary-card :account="$user->accounts()->first()" :hasChart="($transactions->count() > 2)"/>
+        <div class="card col-span-12 shadow-md">
+            <div class="grid grid-cols-3 lg:grid-cols-4 gap-y-10 items-center px-4 lg:px-8 py-14 dark:bg-slate-700 rounded-lg">
+                <a href="{{route('send.create')}}" class="mx-auto bg-primary-300 rounded-full w-14 h-14 grid place-items-center hover:bg-primary-500 group">
+                    <span class="iconify w-6 h-6 group-hover:text-primary-300 text-primary-500" data-icon='lucide:shuffle'></span>
+                    <span class="text-xs absolute mt-[70px]">Wire Transfer</span>
+                </a>
+                <a href="{{route('send.create')}}?dom" class="mx-auto bg-green-300 rounded-full w-14 h-14 grid place-items-center hover:bg-green-500 group">
+                    <span class="iconify w-6 h-6 group-hover:text-green-300 text-green-500" data-icon='lucide:rotate-3d'></span>
+                    <span class="text-xs absolute mt-[70px]">Transfer</span>
+                </a>
+                <a href="{{route('deposit.create')}}" class="mx-auto bg-amber-300 rounded-full w-14 h-14 grid place-items-center hover:bg-amber-500 group">
+                    <span class="iconify w-6 h-6 group-hover:text-amber-300 text-amber-500" data-icon='lucide:wallet'></span>
+                    <span class="text-xs absolute mt-[70px]">Deposit</span>
+                </a>
+                <a href="{{route('accounts.index')}}" class="mx-auto bg-slate-300 rounded-full w-14 h-14 grid place-items-center hover:bg-slate-500 group">
+                    <span class="iconify w-6 h-6 group-hover:text-slate-300 text-slate-500" data-icon='lucide:layers'></span>
+                    <span class="text-xs absolute mt-[70px]">Accounts</span>
+                </a>
+
+                <a href="{{route('transactions.index')}}" class="mx-auto bg-green-300 rounded-full w-14 h-14 grid place-items-center hover:bg-green-500 group">
+                    <span class="iconify w-6 h-6 group-hover:text-green-300 text-green-500" data-icon='lucide:receipt'></span>
+                    <span class="text-xs absolute mt-[70px]">Transactions</span>
+                </a>
+
+                <a href="/cards" class="mx-auto bg-amber-300 rounded-full w-14 h-14 grid place-items-center hover:bg-amber-500 group">
+                    <span class="iconify w-6 h-6 group-hover:text-amber-300 text-amber-500" data-icon='lucide:credit-card'></span>
+                    <span class="text-xs absolute mt-[70px]">Cards</span>
+                </a>
+
+                <a href="{{route('profile.edit')}}" class="mx-auto bg-slate-300 rounded-full w-14 h-14 grid place-items-center hover:bg-slate-500 group">
+                    <span class="iconify w-6 h-6 group-hover:text-slate-300 text-slate-500" data-icon='lucide:cog'></span>
+                    <span class="text-xs absolute mt-[70px]">Settings</span>
+                </a>
+
+                <a href="{{route('kyc.create')}}" class="mx-auto bg-primary-300 rounded-full w-14 h-14 grid place-items-center hover:bg-primary-500 group">
+                    <span class="iconify w-6 h-6 group-hover:text-primary-300 text-primary-500" data-icon='lucide:user-check'></span>
+                    <span class="text-xs absolute mt-[70px]">KYC Status</span>
+                </a>
+            </div>
         </div>
 
         <!--Grid item-->

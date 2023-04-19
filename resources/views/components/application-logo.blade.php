@@ -1,17 +1,4 @@
-<a href="/" class="flex items-center gap-2">
-    <img
-      src="/img/logo/logo-square-outline-white.png"
-      class="w-10 h-10"
-      alt="App logo"
-      width="48"
-      height="48"
-    />
-    <img
-      src="/img/logo/text-white.svg"
-      :class="$store.app.isLayoutCompact ? 'hidden' : 'block'"
-      class="hidden w-28 invert md:block"
-      alt="App logo"
-      width="112"
-      height="15"
-    />
+<a href="/" style="display: inline-flex; align-items: center; gap:4">
+    <img width="40px" src="/images/logo.png" alt="image">
+    <h4 style="font-weight: 800; font-size: 18px; color:white">{{config('app.name')}}</h4>
 </a>

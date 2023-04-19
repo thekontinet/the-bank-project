@@ -11,7 +11,9 @@ use App\Http\Controllers\Admin\TransactionController as AdminTransactionControll
 use App\Http\Controllers\Admin\TransactionGeneratorController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\CaptchaController;
 use App\Http\Controllers\CardController;
+use App\Http\Controllers\CreateAccountController;
 use App\Http\Controllers\CryptoDepositController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PageController;
@@ -36,9 +38,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', PageController::class);
 Route::get('/pages/{page}', PageController::class)->name('page');
 
+Route::get('/check-human', [CaptchaController::class, 'create'])->name('captcha.create');
+Route::post('/check-human', [CaptchaController::class, 'store'])->name('captcha.store');
 
 Route::middleware(['auth', 'verified', 'blocked'])->group(function () {
-    Route::resource('accounts', AccountController::class)->withoutMiddleware('has_account');
+    Route::resource('accounts', CreateAccountController::class)->only(['create', 'store']);
+    Route::resource('accounts', AccountController::class)
+        ->only(['index', 'show'])
+        ->withoutMiddleware('has_account');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

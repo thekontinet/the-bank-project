@@ -1,42 +1,16 @@
 <x-app-layout>
     <div class="col-span-12 md:col-span-5">
         <!--Welcome widget-->
-        <div
-            class="h-full p-10 bg-white border shadow-xl dark:bg-muted-1000 rounded-xl border-muted-200 dark:border-muted-800 shadow-muted-400/10 dark:shadow-muted-800/10"
-        >
-            <div class="flex flex-col justify-between h-full gap-5 text-center">
-                <div class="flex items-center justify-center gap-2">
-                    <div>
-                        <h4 class="text-lg font-semibold uppercase font-heading dark:text-muted-100">
-                            {{$account->name}}
-                        </h4>
-                    </div>
-                </div>
-
-                <p class="-mb-6 font-sans text-sm text-muted-500">
-                    {{ucfirst($account->type)}} Account
-                </p>
-
-                <h2
-                    class="text-4xl font-medium text-muted-800 dark:text-white"
-                >
-                    @money($account->balance, $account->currency)
-                </h2>
-
-                <p class="-mt-5 font-sans text-lg text-muted-500">
-                    {{$account->number}}
-                </p>
-            </div>
-        </div>
+        <x-account-card :account="$account"/>
 
         @if($account->isJoint())
-        <div class="card bg-white/50 my-4 border p-3">
+        <div class="card rounded-md shadow-md bg-white dark:bg-slate-600 my-4 p-3">
             <div class="card-title">
                 <h4 class="text-lg p-4">Account Holders</h4>
             </div>
             <ul>
                 @foreach ($account->holders as $holder)
-                <li class="border-b px-4 py-5 flex gap-2">
+                <li class="px-4 py-5 flex gap-2">
                     <img class="avatar w-10 h-10 mr-2 rounded-full" src="{{$holder->avatar}}" alt="">
                     <p>
                         <span class="font-medium block">{{$holder->name}}</span>

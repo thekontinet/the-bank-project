@@ -5,12 +5,12 @@
             <h2 class="text-lg font-medium font-heading text-muted-800 dark:text-white">
                 Accounts
             </h2>
-            <a class="btn btn-sm" href="{{route('accounts.create')}}">Open Account</a>
+            <a class="btn btn-sm btn-primary" href="{{route('accounts.create')}}">New Account</a>
         </div>
 
         <div class="grid md:grid-cols-3">
         @forelse ($accounts as $account)
-             <x-account-card :account="$account"/>
+             <x-account-card :account="$account" :href="route('accounts.show', $account)"/>
              @empty
              <div class="flex col-span-full flex-col items-center justify-center h-full">
                  <svg class="h-24 w-24 text-gray-400 mb-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">

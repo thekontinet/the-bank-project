@@ -15,7 +15,7 @@ if(!function_exists('theme_path')){
 }
 
 if(!function_exists('theme_asset')){
-    function theme_asset($path){
+    function theme_asset($path = ''){
         $theme = config('view.theme');
         $path = trim($path, '/');
         return "/themes/$theme/$path";

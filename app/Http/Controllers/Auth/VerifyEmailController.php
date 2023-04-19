@@ -23,6 +23,8 @@ class VerifyEmailController extends Controller
             event(new Verified($request->user()));
         }
 
-        return redirect()->intended(RouteServiceProvider::HOME.'?verified=1')->with(['message' => 'Email has been verified']);
+        auth()->logout();
+
+        return to_route('login')->with(['message' => 'Welcome! Your email has been verified. Enter your credentials to login']);
     }
 }
