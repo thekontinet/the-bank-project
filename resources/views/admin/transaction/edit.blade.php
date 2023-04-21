@@ -1,7 +1,14 @@
 <x-admin-layout>
     <header class="flex justify-between items-center py-10">
         <h4 class="font-medium">Edit Transaction</h4>
-        <button type="submit" class="btn btn-primary btn-sm" form="t-form">Save</button>
+        <div class="flex items-center gap-2">
+            <button type="submit" class="btn btn-primary btn-sm" form="t-form">Save</button>
+            <form action="{{route('admin.transactions.destroy', $transaction)}}" method="post" onsubmit="return confirm('Are you sure ?')">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-primary btn-sm" form="t-form">Trash</button>
+            </form>
+        </div>
     </header>
     <section>
         <form id="t-form" name="t-form" method="post" action="{{route('admin.transactions.update', $transaction)}}" novalidate>
