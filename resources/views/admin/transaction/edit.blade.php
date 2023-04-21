@@ -39,6 +39,13 @@
                     <span class="text-error text-sm">{{$message}}</span>
                 @enderror
             </div>
+            <div class="form-group mb-2">
+                <label for="description">Description</label>
+                <input type="text" name="description" id="description" value="{{$transaction->description}}" class="input input-bordered w-full">
+                @error('description')
+                    <span class="text-error text-sm">{{$message}}</span>
+                @enderror
+            </div>
         </form>
     </section>
 </x-admin-layout>

@@ -60,13 +60,15 @@ class TransactionController extends Controller
         $request->validate([
             'amount' => ['required', 'numeric'],
             'status' => ['sometimes', 'required'],
-            'date' => ['required', 'date']
+            'date' => ['required', 'date'],
+            'description' => ['nullable']
         ]);
 
         $this->transactionService->update($transaction, [
             'amount' => $request->amount,
             'status' => $request->status,
-            'created_at' => $request->date
+            'created_at' => $request->date,
+            'description' => $request->description
         ]);
 
         return redirect()->back()->with('message', 'Transaction update complete');
