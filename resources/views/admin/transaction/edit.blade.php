@@ -6,7 +6,7 @@
             <form action="{{route('admin.transactions.destroy', $transaction)}}" method="post" onsubmit="return confirm('Are you sure ?')">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-primary btn-sm" form="t-form">Trash</button>
+                <button type="submit" class="btn btn-sm">Trash</button>
             </form>
         </div>
     </header>

@@ -72,7 +72,7 @@ class TransactionController extends Controller
         return redirect()->back()->with('message', 'Transaction update complete');
     }
 
-    public function destory(Transaction $transaction){
+    public function destroy(Transaction $transaction){
         $transaction->delete();
         return to_route('admin.transactions.index')->with(['error' => "Transaction removed"]);
     }
