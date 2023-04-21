@@ -14,6 +14,7 @@ use Illuminate\Validation\Rule;
 
 class TransactionController extends Controller
 {
+    public function __construct(private TransactionService $transactionService){}
     public function index(){
         $transactions = Transaction::paginate();
         return view('admin.transaction.index', compact('transactions'));
@@ -51,23 +52,22 @@ class TransactionController extends Controller
         return view('admin.transaction.show', compact('transaction'));
     }
 
+    public function edit(Transaction $transaction){
+        return view('admin.transaction.edit', compact('transaction'));
+    }
+
     public function update(Request $request, Transaction $transaction, TransactionService $transactionService){
         $request->validate([
-            'action' => ['sometimes', 'required', Rule::in([Transaction::STATUS_FAILED, Transaction::STATUS_SUCCESS])],
-            'created_at' => ['sometimes', 'required', 'date']
+            'amount' => ['required', 'numeric'],
+            'status' => ['sometimes', 'required'],
+            'date' => ['required', 'date']
         ]);
 
-        if($request->created_at){
-            $transaction->update(['created_at' => $request->created_at]);
-        }
-
-        if($request->action){
-            if($request->action === Transaction::STATUS_SUCCESS){
-                $transactionService->processTransaction($transaction);
-            }else{
-                $transaction->update(['status' => $request->action]);
-            }
-        }
+        $this->transactionService->update($transaction, [
+            'amount' => $request->amount,
+            'status' => $request->status,
+            'created_at' => $request->date
+        ]);
 
         return redirect()->back()->with('message', 'Transaction update complete');
     }

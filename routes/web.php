@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\TokenController;
 use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
 use App\Http\Controllers\Admin\TransactionGeneratorController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Api\TransactionController as ApiTransactionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\CaptchaController;
 use App\Http\Controllers\CardController;
@@ -86,24 +87,8 @@ Route::name('admin.')->prefix('admin')->middleware(['auth', 'admin'])->group(fun
     Route::resource('kyc', KycController::class);
 });
 
-Route::middleware('auth')->get('chart/transaction', function(){
-    $currentMonth = now()->subMonths(4)->format('Y-m');
-    $transactions = Transaction::where('user_id', auth()->id())
-        ->whereRaw("DATE_FORMAT(created_at, '%Y-%m') >= '$currentMonth'")
-        ->orderBy('created_at')
-        ->get();
-
-    $data = [];
-
-    foreach ($transactions as $transaction) {
-        $data[] = [
-            'x' => $transaction->created_at->toIso8601String(),
-            'y' => $transaction->amount / 100,
-        ];
-    }
-
-    return response()->json($data);
-});
+Route::middleware('auth')->get('chart/transaction', [ApiTransactionController::class, 'index']);
+Route::middleware('auth')->get('chart/transaction-flow', [ApiTransactionController::class, 'calculateTransactionTotalFlow']);
 
 
 require __DIR__.'/auth.php';

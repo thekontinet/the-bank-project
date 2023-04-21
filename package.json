@@ -16,6 +16,8 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "daisyui": "^2.51.5"
+        "apexcharts": "^3.39.0",
+        "daisyui": "^2.51.5",
+        "moment": "^2.29.4"
     }
 }

@@ -31,6 +31,7 @@ class DashboardController extends Controller
 
         return response()->view('dashboard', [
             'user' => $user,
+            'accounts' => $user->accounts,
             'transactions' => $transactions,
             'total_deposit' => !$transactionSummary ? 0 : money($transactionSummary->total_deposit, $transactionSummary->currency) ?? 0,
             'total_deposit_progress' => !$transactionSummary ? 0 : $transactionSummary->total_deposit/$transactionSummary->total * 100 ?? 0,

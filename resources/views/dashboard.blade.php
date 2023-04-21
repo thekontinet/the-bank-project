@@ -3,62 +3,41 @@
     <div x-data="dashboard()" class="grid grid-cols-12 gap-6 pt-6 pb-20">
         <!--Grid item-->
         <div class="col-span-12">
-            <x-balance-summary-card :account="$user->accounts()->first()" :hasChart="($transactions->count() > 2)"/>
+            <div class="carousel w-full">
+                @foreach ($accounts as $account)
+                    <div id="account-{{$account->id}}" class="carousel-item w-full">
+                        <x-account-card :account="$account" :href="route('accounts.show', $account)"/>
+                    </div>
+                @endforeach
+            </div>
+            <div class="flex justify-center w-full py-2 gap-2">
+                @foreach ($accounts as $account)
+                    <a href="#account-{{$account->id}}" class="h-1 w-10 bg-black focus:bg-primary-500"></a>
+                @endforeach
+            </div>
         </div>
 
-        <div class="card col-span-12 shadow-md">
-            <div class="grid grid-cols-3 lg:grid-cols-4 gap-y-10 items-center px-4 lg:px-8 py-14 dark:bg-slate-700 rounded-lg">
-                <a href="{{route('send.create')}}" class="mx-auto bg-primary-300 rounded-full w-14 h-14 grid place-items-center hover:bg-primary-500 group">
-                    <span class="iconify w-6 h-6 group-hover:text-primary-300 text-primary-500" data-icon='lucide:shuffle'></span>
-                    <span class="text-xs absolute mt-[70px]">Wire Transfer</span>
-                </a>
-                <a href="{{route('send.create')}}?dom" class="mx-auto bg-green-300 rounded-full w-14 h-14 grid place-items-center hover:bg-green-500 group">
-                    <span class="iconify w-6 h-6 group-hover:text-green-300 text-green-500" data-icon='lucide:rotate-3d'></span>
-                    <span class="text-xs absolute mt-[70px]">Transfer</span>
-                </a>
-                <a href="{{route('deposit.create')}}" class="mx-auto bg-amber-300 rounded-full w-14 h-14 grid place-items-center hover:bg-amber-500 group">
-                    <span class="iconify w-6 h-6 group-hover:text-amber-300 text-amber-500" data-icon='lucide:wallet'></span>
-                    <span class="text-xs absolute mt-[70px]">Deposit</span>
-                </a>
-                <a href="{{route('accounts.index')}}" class="mx-auto bg-slate-300 rounded-full w-14 h-14 grid place-items-center hover:bg-slate-500 group">
-                    <span class="iconify w-6 h-6 group-hover:text-slate-300 text-slate-500" data-icon='lucide:layers'></span>
-                    <span class="text-xs absolute mt-[70px]">Accounts</span>
-                </a>
-
-                <a href="{{route('transactions.index')}}" class="mx-auto bg-green-300 rounded-full w-14 h-14 grid place-items-center hover:bg-green-500 group">
-                    <span class="iconify w-6 h-6 group-hover:text-green-300 text-green-500" data-icon='lucide:receipt'></span>
-                    <span class="text-xs absolute mt-[70px]">Transactions</span>
-                </a>
-
-                <a href="/cards" class="mx-auto bg-amber-300 rounded-full w-14 h-14 grid place-items-center hover:bg-amber-500 group">
-                    <span class="iconify w-6 h-6 group-hover:text-amber-300 text-amber-500" data-icon='lucide:credit-card'></span>
-                    <span class="text-xs absolute mt-[70px]">Cards</span>
-                </a>
-
-                <a href="{{route('profile.edit')}}" class="mx-auto bg-slate-300 rounded-full w-14 h-14 grid place-items-center hover:bg-slate-500 group">
-                    <span class="iconify w-6 h-6 group-hover:text-slate-300 text-slate-500" data-icon='lucide:cog'></span>
-                    <span class="text-xs absolute mt-[70px]">Settings</span>
-                </a>
-
+        <div class="card col-span-12 shadow-md py-8 dark:bg-slate-700">
+            <h4 class="text-sm p-4">Quick Actions</h4>
+            <div class="grid gap-4 grid-cols-2 lg:grid-cols-4 items-center px-4 lg:px-8 rounded">
+                <x-action-button :href="route('send.create')" title="Wire Transfer" icon="shuffle"/>
+                <x-action-button href="{{route('send.create')}}?dom" title="Transfer" icon="rotate-3d"/>
+                <x-action-button :href="route('deposit.create')" title="Deposit" icon="wallet"/>
+                <x-action-button :href="route('accounts.index')" title="Accounts" icon="layers"/>
+                <x-action-button :href="route('transactions.index')" title="Transactions" icon="receipt"/>
+                <x-action-button href="/cards" title="Cards" icon="credit-card"/>
+                <x-action-button :href="route('profile.edit')" title="Settings" icon="cog"/>
                 @if (!auth()->user()->hasAdminRole())
-                <a href="{{route('kyc.create')}}" class="mx-auto bg-primary-300 rounded-full w-14 h-14 grid place-items-center hover:bg-primary-500 group">
-                    <span class="iconify w-6 h-6 group-hover:text-primary-300 text-primary-500" data-icon='lucide:user-check'></span>
-                    <span class="text-xs absolute mt-[70px]">KYC Status</span>
-                </a>
+                    <x-action-button :href="route('kyc.create')" title="KYC Status" icon="user-check"/>
                 @else
-                <a href="{{route('admin.users.index')}}" class="mx-auto bg-primary-300 rounded-full w-14 h-14 grid place-items-center hover:bg-primary-500 group">
-                    <span class="iconify w-6 h-6 group-hover:text-primary-300 text-primary-500" data-icon='lucide:user-cog'></span>
-                    <span class="text-xs absolute mt-[70px]">Admin Panel</span>
-                </a>
+                    <x-action-button :href="route('admin.users.index')" title="Admin Panel" icon="user-cog"/>
                 @endif
             </div>
         </div>
 
-        <!--Grid item-->
-        <x-transaction-overview-card title="{{$total_deposit}}" content="Money In Last 30 Days" :progress="$total_deposit_progress" />
-
-        <!--Grid item-->
-        <x-transaction-overview-card title="{{$total_withdraw}}" content="Money Out Last 30 Days" :progress="$total_withdraw_progress"/>
+        <div class="col-span-12">
+            <x-balance-summary-card :account="$user->accounts()->first()" :hasChart="($transactions->count() > 2)"/>
+        </div>
 
         <!--Grid item-->
         <div class="col-span-12 md:col-span-12">

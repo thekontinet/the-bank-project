@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Exceptions\TransactionException;
 use App\Mail\TransactionAlert;
 use App\Models\Account;
 use App\Models\Transaction;
@@ -121,5 +122,27 @@ class TransactionService
         Mail::to($transaction->user)
             ->bcc($transaction->account->holders()->pluck('email')->toArray())
             ->send(new TransactionAlert($transaction));
+    }
+
+    public function getStatus($key = null){
+        $statuses = [
+            Transaction::STATUS_FAILED,
+            Transaction::STATUS_PROCESSING,
+            Transaction::STATUS_SUCCESS,
+            Transaction::STATUS_PENDING,
+        ];
+
+        $keys = array_flip($statuses);
+
+        if($key != null && !array_key_exists($key, $keys)) throw new TransactionException('Key not found');
+
+        return $key ? $key : $statuses;
+    }
+
+    public function update(Transaction $transaction, $data){
+        if($data['amount']) $data['amount'] = $data['amount'] * 100;
+        if($data['status'] && !in_array($data['status'], $this->getStatus())) throw new TransactionException('Invalid transaction status');
+        if($data['status'] && $data['status'] == $this->getStatus('success')) $this->processTransaction($transaction);
+        return $transaction->update($data);
     }
 }
