@@ -27,9 +27,19 @@ x-init="$store.app.isDark = JSON.parse(localStorage.getItem('dark'))"
       class="w-full max-w-5xl min-h-screen px-4 mx-auto bg-white md:px-6 dark:bg-muted-900"
     >
       <!--Site navbar-->
-      @include('layouts.navigation')
+    @include('layouts.navigation')
     {{$slot}}
+
     @stack('scripts')
     @include('layouts.chat')
+
+    <script type="text/javascript">
+    function googleTranslateElementInit() {
+    new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.VERTICAL}, 'google_translate_element');
+    }
+    </script>
+
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
   </body>
 </html>

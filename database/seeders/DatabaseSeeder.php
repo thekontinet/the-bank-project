@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             'pin' => '1234'
         ]);
 
-        // \App\Models\User::factory(5)->create();
+        if(config('app.env') === 'local'){
+            \App\Models\User::factory(5)->create();
+        }
     }
 }

@@ -124,7 +124,10 @@ class="fixed top-0 left-0 z-50 h-full transition-all duration-300 bg-muted-100 d
         </span>
       </a>
     </li>
-  </ul>
+</ul>
+<div class="w-full mt-8">
+    <div id="google_translate_element"></div>
+</div>
 </div>
 <!--Footer-->
 @include('layouts.sidebar-footer')

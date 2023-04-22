@@ -29,6 +29,18 @@
             </x-text-input>
             <x-input-error :messages="$errors->get('to')" class="mt-2" />
         </div>
+        <div class="grid grid-cols-2 gap-2">
+            <div>
+                <label class="form-label">Min. Amount range</label>
+                <input type="number" name="min" class="input input-bordered w-full" placeholder="Min Amount" value="5000">
+                <x-input-error :messages="$errors->get('min')" class="mt-2" />
+            </div>
+            <div>
+                <label>Max Amount Range</label>
+                <input type="number" name="max" class="input input-bordered w-full" placeholder="Max Amount" value="10000">
+                <x-input-error :messages="$errors->get('max')" class="mt-2" />
+            </div>
+        </div>
         <x-primary-button>Generate</x-primary-button>
     </form>
 </x-admin-layout>

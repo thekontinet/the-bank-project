@@ -23,15 +23,17 @@
                                         <x-application-logo/>
                                     </div>
 
-                                    <h3>Login your Account</h3>
-                                    <p>Dont have an account with us? <a href="{{route('register')}}">Create One</a></p>
+                                    <h3>Create A New Password</h3>
+                                    <p>Please enter a secured password for your account</p>
 
                                     @include(theme_path('includes.alert'))
 
-                                    <form method="POST" action="{{route('login')}}">
+                                    <form method="POST" action="{{ route('password.store') }}">
                                         @csrf
+                                        <input type="hidden" name="token" value="{{ $request->route('token') }}">
+
                                         <div class="form-group">
-                                            <input type="email" name="email" id="email" placeholder="Your email address" class="form-control @error('email') is-invalid @enderror">
+                                            <input type="email" name="email" id="email" value="{{old('email', $request->email)}}" placeholder="Your email address" class="form-control @error('email') is-invalid @enderror">
                                             @error('email') <span class="invalid-feedback">{{$message}}</span>@enderror
                                         </div>
 
@@ -40,11 +42,12 @@
                                             @error('password') <span class="invalid-feedback">{{$message}}</span>@enderror
                                         </div>
 
-                                        <button type="submit" class="btn btn-primary">Continue</button>
-
-                                        <div class="mt-4">
-                                            <a class="btn-link" href="{{route('password.request')}}">I forgot my password</a>
+                                        <div class="form-group">
+                                            <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Your password Again" class="form-control @error('password_confirmation') is-invalid @enderror">
+                                            @error('password_confirmation') <span class="invalid-feedback">{{$message}}</span>@enderror
                                         </div>
+
+                                        <button type="submit" class="btn btn-primary">Submit</button>
                                     </form>
                                 </div>
                             </div>

@@ -23,27 +23,22 @@
                                         <x-application-logo/>
                                     </div>
 
-                                    <h3>Login your Account</h3>
-                                    <p>Dont have an account with us? <a href="{{route('register')}}">Create One</a></p>
+                                    <h3>Password Reset</h3>
+                                    <p>Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.</p>
 
                                     @include(theme_path('includes.alert'))
 
-                                    <form method="POST" action="{{route('login')}}">
+                                    <form  method="POST" action="{{ route('password.email') }}">
                                         @csrf
                                         <div class="form-group">
                                             <input type="email" name="email" id="email" placeholder="Your email address" class="form-control @error('email') is-invalid @enderror">
                                             @error('email') <span class="invalid-feedback">{{$message}}</span>@enderror
                                         </div>
 
-                                        <div class="form-group">
-                                            <input type="password" name="password" id="password" placeholder="Your password" class="form-control @error('password') is-invalid @enderror">
-                                            @error('password') <span class="invalid-feedback">{{$message}}</span>@enderror
-                                        </div>
-
                                         <button type="submit" class="btn btn-primary">Continue</button>
 
                                         <div class="mt-4">
-                                            <a class="btn-link" href="{{route('password.request')}}">I forgot my password</a>
+                                            <a class="btn-link" href="{{route('login')}}">Go Back</a>
                                         </div>
                                     </form>
                                 </div>

@@ -20,13 +20,15 @@ class TransactionGeneratorController extends Controller
             'from' => ['required', 'date'],
             'to' => ['required', 'date'],
             'account' => ['required', 'exists:accounts,number'],
-            'quantity' => ['required', 'numeric', 'max:50']
+            'quantity' => ['required', 'numeric', 'max:50'],
+            'min' => ['required', 'numeric', "min:1"],
+            'max' => ['required', 'numeric', "gt:{$request->min}"]
         ]);
 
         $account = Account::whereNumber($request->account)->first();
 
         for ($i=0; $i < $request->quantity; $i++) {
-            $amount = rand(5000, 100000);
+            $amount = rand($request->min, $request->max);
             $created_at =  fake()->dateTimeBetween($request->from, $request->to);
             $bank = fake()->randomElement($this->getBankNames());
             $accountName = fake()->name();

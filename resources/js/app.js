@@ -1,4 +1,5 @@
 import './charts'
+
 document.addEventListener('alpine:init', () => {
     window.Alpine.data('progress', (endPoint) => ({
         pg: 0,
@@ -75,3 +76,4 @@ document.addEventListener('alpine:init', () => {
         }
     }))
 })
+

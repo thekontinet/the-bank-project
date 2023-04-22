@@ -7,6 +7,7 @@ use App\Mail\TransactionAlert;
 use App\Models\Account;
 use App\Models\Transaction;
 use App\Models\Wallet;
+use App\Notifications\TransactionSuccess;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
@@ -119,9 +120,7 @@ class TransactionService
     }
 
     public function sendNotification(Transaction $transaction){
-        Mail::to($transaction->user)
-            ->bcc($transaction->account->holders()->pluck('email')->toArray())
-            ->send(new TransactionAlert($transaction));
+        $transaction->notify(New TransactionSuccess($transaction));
     }
 
     public function getStatus($key = null){

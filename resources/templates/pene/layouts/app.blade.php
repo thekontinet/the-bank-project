@@ -47,7 +47,9 @@
             </div>
         </div>
         <!-- End Preloader -->
-
+        <div class="position-absolute px-2 py-4" style="right: 0;">
+            <div id="google_translate_element"></div>
+        </div>
         @yield('content')
 
         <div class="go-top"><i class="fas fa-arrow-up"></i></div>
@@ -78,5 +80,12 @@
         <script src="{{theme_asset('')}}assets/js/main.js"></script>
 
         <script src="{{env('LIVE_CHAT_URL')}}" async></script>
+        <script type="text/javascript">
+            function googleTranslateElementInit() {
+              new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+            }
+        </script>
+
+        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     </body>
 </html>
