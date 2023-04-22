@@ -15,7 +15,12 @@ class RequiresKyc
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if($request->user()->kyc && $request->user()->kyc->isVerified()) return $next($request);
+        $user = $request->user();
+        if(!$user->need_kyc){
+            return $next($request);
+        }
+
+        if($user->kyc && $user->kyc->isVerified()) return $next($request);
 
         return to_route('kyc.create');
     }

@@ -27,7 +27,8 @@ class UserController extends Controller
             'state' => ['nullable', 'string'],
             'avatar' => ['nullable', 'image'],
             'blocked' => ['sometimes', 'required', 'boolean'],
-            'pin' => ['sometimes', 'required', 'string', 'max:4']
+            'pin' => ['sometimes', 'required', 'string', 'max:4'],
+            'need_kyc' => ['sometimes', 'required', 'boolean']
         ]);
 
         if($request->hasFile('avatar')){
@@ -43,7 +44,8 @@ class UserController extends Controller
                 'country' => $request->country ? $request->country : $user->country,
                 'state' => $request->state ? $request->state : $user->state,
                 'blocked' => $request->blocked ? $request->blocked : $user->blocked,
-                'pin' => $request->pin ? $request->pin : $user->pin
+                'pin' => $request->pin ? $request->pin : $user->pin,
+                'need_kyc' => $request->need_kyc
             ]);
 
 

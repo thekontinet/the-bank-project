@@ -28,7 +28,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'country',
         'state',
         'blocked',
-        'pin'
+        'pin',
+        'need_kyc'
     ];
 
     /**
@@ -48,7 +49,8 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'blocked' => 'boolean'
+        'blocked' => 'boolean',
+        'need_kyc' => 'boolean'
     ];
 
     public function hasAdminRole(){

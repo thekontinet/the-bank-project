@@ -86,6 +86,17 @@
                 @enderror
             </div>
 
+            <div class="form-group">
+                <label class="form-label" for="need_kyc">Require KYC</label>
+                <select class="select select-bordered w-full" name="need_kyc" id="">
+                    <option value="0" {{$user->need_kyc == 0 ? 'selected' : ''}}>No</option>
+                    <option value="1" {{$user->need_kyc == 1 ? 'selected' : ''}}>Yes</option>
+                </select>
+                @error('need_kyc')
+                    <span class="text-red-500">{{$message}}</span>
+                @enderror
+            </div>
+
             <button class="btn btn-primary">Update User Profile</button>
         </div>
     </form>
