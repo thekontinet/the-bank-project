@@ -24,7 +24,7 @@
                                     </div>
 
                                     <h3>Login your Account</h3>
-                                    <p>Dont have an account with us? <a href="{{route('register')}}">Create One</a></p>
+                                    <p>Dont have an account with us? <a class="btn-link text-danger" href="{{route('register')}}">Create One</a></p>
 
                                     @include(theme_path('includes.alert'))
 
@@ -35,9 +35,15 @@
                                             @error('email') <span class="invalid-feedback">{{$message}}</span>@enderror
                                         </div>
 
-                                        <div class="form-group">
-                                            <input type="password" name="password" id="password" placeholder="Your password" class="form-control @error('password') is-invalid @enderror">
-                                            @error('password') <span class="invalid-feedback">{{$message}}</span>@enderror
+                                        <div x-data="{showPassword:false}">
+                                            <div class="form-group">
+                                                <input :type="showPassword ? 'text' : 'password'" name="password" id="password" placeholder="Your password" class="form-control @error('password') is-invalid @enderror">
+                                                @error('password') <span class="invalid-feedback">{{$message}}</span>@enderror
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="checkbox" id="s-password" x-model='showPassword'>
+                                                <label for="s-password">Show password</label>
+                                            </div>
                                         </div>
 
                                         <button type="submit" class="btn btn-primary">Continue</button>
