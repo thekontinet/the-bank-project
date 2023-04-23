@@ -1,4 +1,4 @@
-## Banko
+## Banking Software
 
 This is a web application for banking management built using the Laravel framework. It provides a platform for managing bank accounts, transactions, and customer information.
 
@@ -6,59 +6,59 @@ This is a web application for banking management built using the Laravel framewo
 To install the application, follow these steps:
 
 1. Clone the repository
-```bash
-git clone https://github.com/thekontinet/the-bank-project.git
-```
+    ```bash
+    git clone https://github.com/thekontinet/the-bank-project.git
+    ```
 
 2. Install dependencies using Composer:
-```bash
-composer install
-```
+    ```bash
+    composer install
+    ```
 
 3. Rename `.env.example` to `.env` and fill the required parameters listed below:
-```env
-APP_NAME=
-APP_CONTACT_ADDRESS=
-APP_PHONE=
-APP_EMAIL=
+    ```env
+    APP_NAME=
+    APP_CONTACT_ADDRESS=
+    APP_PHONE=
+    APP_EMAIL=
 
-DB_CONNECTION=
-DB_HOST=
-DB_PORT=
-DB_DATABASE=
-DB_USERNAME=
-DB_PASSWORD=
+    DB_CONNECTION=
+    DB_HOST=
+    DB_PORT=
+    DB_DATABASE=
+    DB_USERNAME=
+    DB_PASSWORD=
 
-MAIL_MAILER=
-MAIL_HOST=
-MAIL_PORT=
-MAIL_USERNAME=
-MAIL_PASSWORD=
-MAIL_ENCRYPTION=
-MAIL_FROM_ADDRESS=
-MAIL_FROM_NAME=
+    MAIL_MAILER=
+    MAIL_HOST=
+    MAIL_PORT=
+    MAIL_USERNAME=
+    MAIL_PASSWORD=
+    MAIL_ENCRYPTION=
+    MAIL_FROM_ADDRESS=
+    MAIL_FROM_NAME=
 
-# cryptocompare.com api key
-CRYPTO_API_KEY=
+    # cryptocompare.com api key
+    CRYPTO_API_KEY=
 
-# tidio livechat url
-LIVE_CHAT_URL=
-```
+    # tidio livechat url
+    LIVE_CHAT_URL=
+    ```
 
 4. Run migrations to create the database schema:
-```bash
-php artisan migrate --seed
-```
+    ```bash
+    php artisan migrate --seed
+    ```
 
 5. Generate App Key
-```bash
-php artisan key:generate
-```
+    ```bash
+    php artisan key:generate
+    ```
 
 6. Start the server
-```bash
-php artisan serve
-```
+    ```bash
+    php artisan serve
+    ```
 
 ## Features
 This application has the following features:
