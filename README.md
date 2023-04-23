@@ -2,7 +2,7 @@
 
 This is a web application for banking management built using the Laravel framework. It provides a platform for managing bank accounts, transactions, and customer information.
 
-![Screenshot](Screenshot.png)
+![Screenshot](screenshot-main.png)
 
 ## Installation
 To install the application, follow these steps:
