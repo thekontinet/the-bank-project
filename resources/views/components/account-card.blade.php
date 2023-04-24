@@ -11,7 +11,7 @@
                 <p class="font-mono text-sm">{{$account->number}}</p>
             </div>
         </div>
-        <p class="font-medium font-mono text-3xl my-2 tracking-wider">@money($account->balance)</p>
+        <p class="font-medium font-mono text-3xl my-2 tracking-wider">@money($account->balance, $account->currency)</p>
         <p class="text-sm text-primary-200 font-semibold">{{$account->name}}</p>
     </div>
     @if ($href)
