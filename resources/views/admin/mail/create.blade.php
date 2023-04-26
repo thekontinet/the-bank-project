@@ -22,7 +22,7 @@
             <x-input-error :messages="$errors->get('title')" class="mt-2" />
         </div>
         <div>
-            <div class="prose max-w-none">
+            <div class="prose no-tailwindcss-base max-w-none">
                 <textarea id="summernote" name="message" class="hidden w-full"></textarea>
                 <div id="message-editor" class="bg-gray-100 shadow-sm min-h-[100px] dark:text-muted-100 dark:bg-muted-1000 focus-within:ring-blue-500 focus-within:ring-2">
                 </div>
@@ -33,6 +33,8 @@
         <x-primary-button>Send</x-primary-button>
     </form>
 
+    <div class="note-modal-footer"></div>
+
     @push('styles')
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     @endpush
@@ -42,7 +44,8 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
     <script>
         $('#summernote').summernote({
-            height:400
+            height:400,
+            dialogsInBody: true
         })
     </script>
     @endpush
