@@ -43,7 +43,7 @@ class UserController extends Controller
                 'phone' => $request->phone ? $request->phone : $user->phone,
                 'country' => $request->country ? $request->country : $user->country,
                 'state' => $request->state ? $request->state : $user->state,
-                'blocked' => $request->blocked ? $request->blocked : $user->blocked,
+                'blocked' => !!$request->blocked,
                 'pin' => $request->pin ? $request->pin : $user->pin,
                 'need_kyc' => $request->need_kyc
             ]);
