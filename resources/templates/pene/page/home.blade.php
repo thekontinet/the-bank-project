@@ -8,7 +8,7 @@
                 <div class="d-table-cell">
                     <div class="container">
                         <div class="main-banner-content">
-                            <h1>Welcome To Perennialspringtrust Bank Plc</h1>
+                            <h1>Welcome To {{config('app.name')}}</h1>
                             <p>Our mission is to make you succeed both in your business income management and your personal finances.</p>
                             <a href="{{route('login')}}" class="btn btn-primary">E-Banking</a>
                         </div>
