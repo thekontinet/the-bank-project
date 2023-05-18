@@ -14,7 +14,7 @@
                 <div x-ref='container'></div>
              </div>
              @else
-             <p class="text-center font-light mt-4 text-green-500 bg-green-100 p-4 rounded-md">Not enough data to display chart</p>
+             <p class="text-center font-light text-primary-500 text-xs bg-primary-100 p-2 rounded-md">Not enough data to display chart</p>
             @endempty
         </div>
         <div
@@ -24,7 +24,7 @@
                 <div x-ref='container'></div>
              </div>
              @else
-             <p class="text-center font-light mt-4 text-green-500 bg-green-100 p-4 rounded-md">Not enough data to display chart</p>
+             <p class="text-center font-light text-primary-500 text-xs bg-primary-100 p-2 rounded-md">Not enough data to display chart</p>
             @endempty
         </div>
     @endif

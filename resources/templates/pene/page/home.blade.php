@@ -518,7 +518,7 @@
                 <div class="account-create-content">
                     <h2>Apply for an account in minutes</h2>
                     <p>Get your {{config('app.name')}} account today!</p>
-                    <a href="{{route('register')}}" class="btn btn-primary">Get Your Luvion Account</a>
+                    <a href="{{route('register')}}" class="btn btn-primary">Get Your {{config('app.name')}} Account</a>
                 </div>
             </div>
         </section>
