@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('number');
             $table->string('currency');
-            $table->string('balance')->default(0);
+            $table->bigInteger('balance')->default(0);
             $table->enum('type', ['savings', 'current', 'joint'])
                 ->default('savings');
             $table->timestamps();

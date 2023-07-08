@@ -38,7 +38,7 @@
                        @if(auth()->user()->hasAdminRole())
                        <td class="px-4 py-2">
                             <a class="btn btn-sm btn-primary btn-circle" href="{{route('admin.transactions.edit', $transaction)}}">
-                                <span class="w-4 h-4 iconify" data-icon='lucide:pencil'></span>
+                                <span title="transaction settings" class="w-4 h-4 iconify" data-icon='lucide:pencil'></span>
                             </a>
                         </td>
                        @endif

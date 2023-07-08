@@ -27,8 +27,8 @@ it('cannot render another users account in list', function () {
     $response = get('/accounts');
 
     $response->assertStatus(200);
-    $response->assertSeeText($account1->short_number);
-    $response->assertDontSeeText($account2->short_number);
+    $response->assertSeeText($account1->number, false);
+    $response->assertDontSeeText($account2->number);
 });
 
 it('can show an account', function () {

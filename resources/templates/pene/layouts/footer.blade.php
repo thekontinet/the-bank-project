@@ -25,7 +25,7 @@
                     <ul class="list">
                         <li><a href="{{route('page', 'about')}}">About Us</a></li>
                         <li><a href="{{route('page', 'service')}}">Services</a></li>
-                        <li><a href="{{route('register')}}">E-Bnaking</a></li>
+                        <li><a href="{{route('register')}}">E-Banking</a></li>
                     </ul>
                 </div>
             </div>

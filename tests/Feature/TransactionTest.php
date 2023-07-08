@@ -46,6 +46,19 @@ it('admin can see the transaction admin settings icon', function () {
     $response->assertSee('transaction settings');
 });
 
+it('user cannot see the transaction admin settings icon', function () {
+    $account = Account::factory()->create();
+    Transaction::factory(10)->create([
+        'account_id' => $account->id
+    ]);
+    actingAs($account->user);
+
+    $response = get(route('transactions.index'));
+
+    $response->assertStatus(200);
+    $response->assertDontSee('transaction settings');
+});
+
 it('can require token', function(){
     $account = Account::factory()->for(User::factory())->has(Token::factory())->create();
     $account->credit(1000);

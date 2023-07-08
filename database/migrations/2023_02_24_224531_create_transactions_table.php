@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('account_id')->constrained()->cascadeOnDelete();
             $table->string('currency');
-            $table->integer('amount');
+            $table->bigInteger('amount');
             $table->string('type')->comment('This will store the transaction type like deposit, withdraw, etc');
             $table->text('description')->nullable();
             $table->string('status')->nullable()->default(null);

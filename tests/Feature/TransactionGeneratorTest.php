@@ -21,6 +21,8 @@ it('can generate transaction for an account', function () {
     $response = $this->post("/admin/transactions/generate", [
         'from' => now()->subMonths(10),
         'to' => now(),
+        'min' => 10000,
+        'max' => 100000,
         'account' => $account->number,
         'quantity' => 10
     ]);

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class UserController extends Controller
 {
     public function index(){
-        $users = User::withCount('accounts')->paginate('20');
+        $users = User::withCount('accounts')->paginate(20);
         return view('admin.user.index', compact('users'));
     }
 
@@ -45,7 +45,7 @@ class UserController extends Controller
                 'state' => $request->state ? $request->state : $user->state,
                 'blocked' => !!$request->blocked,
                 'pin' => $request->pin ? $request->pin : $user->pin,
-                'need_kyc' => $request->need_kyc
+                'need_kyc' => $request->need_kyc ? $request->need_kyc : $user->need_kyc,
             ]);
 
 

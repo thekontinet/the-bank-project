@@ -22,7 +22,7 @@ class AccountFactory extends Factory
             'user_id' => User::factory(),
             'name' => fake()->name(),
             'number' => rand(1000000000, 9000000000),
-            'currency' => fake()->currencyCode(),
+            'currency' => fake()->randomElement(['EUR', 'USD']),
         ];
     }
 }

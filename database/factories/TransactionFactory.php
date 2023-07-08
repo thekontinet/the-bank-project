@@ -21,7 +21,7 @@ class TransactionFactory extends Factory
         return [
             'user_id' => User::factory(),
             'account_id' => Account::factory(),
-            'currency' => fake()->currencyCode(),
+            'currency' => fake()->randomElement(['EUR', 'USD']),
             'amount' => rand(10000, 100000),
             'type' => fake()->randomElement(['deposit', 'withdraw']),
         ];

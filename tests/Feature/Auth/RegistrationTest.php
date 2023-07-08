@@ -2,8 +2,10 @@
 
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use PragmaRX\Countries\Package\Countries;
 
 use function Pest\Laravel\actingAs;
+use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertModelExists;
 use function Pest\Laravel\get;
 use function Pest\Laravel\post;
@@ -20,7 +22,8 @@ test('new users can register', function () {
         'email' => 'test@example.com',
         'password' => 'password',
         'password_confirmation' => 'password',
-        'country' => 'usa',
+        'country' => Countries::first()->name->common,
+        'state' => 'test state',
         'pin' => '1234',
     ]);
 
@@ -35,17 +38,18 @@ test('admin can view registration form', function(){
     $response->assertStatus(200);
 });
 
-test('only admin can register new user', function () {
+test('admin can register new user', function () {
     actingAs(User::factory()->admin()->create());
     $response = post('/admin/register', [
         'name' => 'Test User',
         'email' => 'test@example.com',
         'password' => 'password',
         'password_confirmation' => 'password',
-        'country' => 'USA',
+        'country' => Countries::first()->name->common,
+        'state' => 'test state',
         'pin' => '1234',
     ]);
 
     $response->assertRedirect();
-    assertModelExists(User::whereEmail('test@example.com')->first());
+    assertDatabaseHas(User::class, ['email' => 'test@example.com']);
 });

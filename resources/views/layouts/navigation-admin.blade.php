@@ -80,7 +80,7 @@
         class="inline-flex items-center justify-center w-10 h-10 font-sans text-sm transition-all duration-300 bg-white rounded-full shadow-lg text-muted-300 dark:text-muted-700 hover:text-yellow-400 dark:hover:text-yellow-400 dark:bg-muted-1000 shadow-muted-400/20 dark:shadow-muted-800/30 hover:shadow-xl tw-accessibility"
         href="/dashboard"
       >
-        <i class="w-5 h-5 iconify" data-icon="fluent:flash-28-filled"></i>
+        <i class="w-6 h-6 animate-bounce text-gray-500 iconify" data-icon="fluent:person-20-filled"></i>
       </a>
     </div>
   </div>

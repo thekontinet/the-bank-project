@@ -55,5 +55,8 @@
                 @endforeach
             </div>
         </div>
+        <div>
+            {{$users->links()}}
+        </div>
     </div>
 </x-admin-layout>
