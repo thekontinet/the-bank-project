@@ -74,7 +74,7 @@
 	// Thumbnails options
 	$thumbnailsSlider.slick({
 		speed:300,
-		slidesToShow:5,
+		slidesToShow:3,
 		slidesToScroll:1,
 		cssEase:'linear',
 		autoplay: true,

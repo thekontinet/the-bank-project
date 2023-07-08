@@ -22,8 +22,8 @@
         <section class="featured-boxes-area">
             <div class="container">
                 <div class="featured-boxes-inner">
-                    <div class="row m-0">
-                        <div class="col-lg-3 col-sm-6 col-md-6 p-0">
+                    <div class="m-0 row">
+                        <div class="p-0 col-lg-3 col-sm-6 col-md-6">
                             <div class="single-featured-box">
                                 <div class="icon color-fb7756">
                                     <i class="flaticon-piggy-bank"></i>
@@ -33,7 +33,7 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-3 col-sm-6 col-md-6 p-0">
+                        <div class="p-0 col-lg-3 col-sm-6 col-md-6">
                             <div class="single-featured-box">
                                 <div class="icon color-facd60">
                                     <i class="flaticon-data-encryption"></i>
@@ -43,7 +43,7 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-3 col-sm-6 col-md-6 p-0">
+                        <div class="p-0 col-lg-3 col-sm-6 col-md-6">
                             <div class="single-featured-box">
                                 <div class="icon color-1ac0c6">
                                     <i class="flaticon-wallet"></i>
@@ -54,7 +54,7 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-3 col-sm-6 col-md-6 p-0">
+                        <div class="p-0 col-lg-3 col-sm-6 col-md-6">
                             <div class="single-featured-box">
                                 <div class="icon">
                                     <i class="flaticon-shield"></i>
@@ -72,7 +72,7 @@
 
         <!-- Start Services Area -->
         <section class="services-area ptb-70">
-            <div class="container-fluid p-0">
+            <div class="p-0 container-fluid">
                 <div class="overview-box">
                     <div class="overview-content">
                         <div class="content left-content">
@@ -107,7 +107,7 @@
 
         <!-- Start Services Area -->
         <section class="services-area ptb-70 bg-f7fafd">
-            <div class="container-fluid p-0">
+            <div class="p-0 container-fluid">
                 <div class="overview-box">
                     <div class="overview-image">
                         <div class="image">
@@ -142,7 +142,7 @@
 
         <!-- Start Services Area -->
         <section class="services-area ptb-70">
-            <div class="container-fluid p-0">
+            <div class="p-0 container-fluid">
                 <div class="overview-box">
                     <div class="overview-content">
                         <div class="content left-content">
@@ -290,7 +290,7 @@
         <!-- End Invoicing Area -->
 
         <!-- Start Fun Facts Area -->
-		<section class="funfacts-area ptb-70 pt-0">
+		<section class="pt-0 funfacts-area ptb-70">
 			<div class="container">
 				<div class="section-title">
 					<h2>We always try to understand customers expectation</h2>
@@ -359,7 +359,7 @@
 										<img src="{{theme_asset('')}}assets/img/client-image/1.jpg" alt="image">
 									</div>
 
-									<h3>John Nacomoto</h3>
+									<h3>Anthonia Nacomoto</h3>
 									<span>Officer</span>
 									<p>Their retirement plans are top notch and also banking with them make life easy. no unnecessary charges and the are always ready to help. they are among the top banks in Europe.</p>
 								</div>
@@ -383,7 +383,7 @@
 										<img src="{{theme_asset('')}}assets/img/client-image/3.jpg" alt="image">
 									</div>
 
-									<h3>Maxwel Warner</h3>
+									<h3>Jessica Warner</h3>
 									<span>Marketing Manager</span>
 									<p>I love the website for this bank. It's so user-friendly and makes it easy to check my balances, transfer funds, and even deposit checks remotely. It's like having a bank branch in my pocket!</p>
 								</div>
@@ -412,42 +412,6 @@
 									<p>This bank offers great features, like higher interest rates and no-fee accounts. They understand the unique financial needs of professionals and work hard to meet them.</p>
 								</div>
 							</div>
-
-							<div class="item">
-								<div class="single-feedback">
-									<div class="client-img">
-										<img src="{{theme_asset('')}}assets/img/client-image/1.jpg" alt="image">
-									</div>
-
-									<h3>Steven Smith</h3>
-									<span>Teacher</span>
-									<p>I've had a few issues with other banks in the past, but this one has always been responsive and helpful. Whenever I have a question or concern, I know I can count on them to resolve it quickly and professionally.</p>
-								</div>
-							</div>
-
-							<div class="item">
-								<div class="single-feedback">
-									<div class="client-img">
-										<img src="{{theme_asset('')}}assets/img/client-image/2.jpg" alt="image">
-									</div>
-
-									<h3>Steven Lucy</h3>
-									<span>Entrepreneur</span>
-									<p>Their Loan facilities came to be of serious importance at a time when i needed money to expand my business. their rates are fair and they give you good financial advice as well.</p>
-								</div>
-							</div>
-
-							<div class="item">
-								<div class="single-feedback">
-									<div class="client-img">
-										<img src="{{theme_asset('')}}assets/img/client-image/3.jpg" alt="image">
-									</div>
-
-									<h3>Anita Terry</h3>
-									<span>Student</span>
-									<p>Nice customer support</p>
-								</div>
-							</div>
 						</div>
 					</div>
 
@@ -471,18 +435,6 @@
 
 							<div class="item">
 								<div class="img-fill"><img src="{{theme_asset('')}}assets/img/client-image/5.jpg" alt="client"></div>
-							</div>
-
-							<div class="item">
-								<div class="img-fill"><img src="{{theme_asset('')}}assets/img/client-image/1.jpg" alt="client"></div>
-							</div>
-
-							<div class="item">
-								<div class="img-fill"><img src="{{theme_asset('')}}assets/img/client-image/2.jpg" alt="client"></div>
-							</div>
-
-							<div class="item">
-								<div class="img-fill"><img src="{{theme_asset('')}}assets/img/client-image/3.jpg" alt="client"></div>
 							</div>
 						</div>
 
