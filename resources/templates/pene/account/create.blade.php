@@ -38,7 +38,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <select name="type" id="type" class="form-control wide mb-3 @error('type') is-invalid @enderror">
+                                    <select name="type" id="type" class="form-control no-select mb-3 @error('type') is-invalid @enderror">
                                         <option selected disabled>Select Account Type</option>
                                         @foreach ($accountTypes as $type)
                                             <option value="{{$type}}">{{ucfirst($type)}}</option>

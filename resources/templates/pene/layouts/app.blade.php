@@ -55,7 +55,7 @@
         <div class="go-top"><i class="fas fa-arrow-up"></i></div>
 
         <!-- Dark/Light Toggle -->
-		<div class="dark-version">
+		<div class="dark-version" style="bottom: 20px; top: auto; position: absolute;">
             <label id="switch" class="switch">
                 <input type="checkbox" onchange="toggleTheme()" id="slider">
                 <span class="slider round"></span>
