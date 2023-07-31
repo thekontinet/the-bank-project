@@ -13,7 +13,7 @@
             </tr>
             @foreach ($kycs as $kyc)
                 <tr>
-                    <td class="px-10">{{$kyc->user->id}}</td>
+                    <td class="px-10">{{$kyc?->user?->id}}</td>
                     <td class="px-10">{{ucfirst($kyc->document_type)}}</td>
                     <td class="px-10">{{$kyc->document_number}}</td>
                     <td class="px-10">{{$kyc->isVerified() ? 'verified' : 'pending'}}</td>

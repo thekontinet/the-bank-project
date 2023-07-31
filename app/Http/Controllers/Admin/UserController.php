@@ -58,7 +58,9 @@ class UserController extends Controller
 
     public function destroy(User $user){
         DB::transaction(function() use($user){
+            $user->kyc()->delete();
             $user->transactions()->delete();
+            $user->accounts()->delete();
             $user->delete();
         });
         return back()->with('message', 'Deleted');
