@@ -28,6 +28,15 @@
 
                                     @include(theme_path('includes.alert'))
 
+                                    @if (env('APP_DEMO'))
+                                        <h5 class="mt-5">Demo Account</h5>
+                                        <p>To test this demo, you can login as admin using the credentials below</p>
+                                        <ul class="text-start">
+                                            <li>Email: admin@email.com</li>
+                                            <li>Password: password</li>
+                                        </ul>
+                                    @endif
+
                                     <form method="POST" action="{{route('login')}}">
                                         @csrf
                                         <div class="form-group">
