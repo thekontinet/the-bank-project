@@ -9,16 +9,20 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $users = User::withCount('accounts')->paginate(20);
+
         return view('admin.user.index', compact('users'));
     }
 
-    public function edit(User $user){
+    public function edit(User $user)
+    {
         return view('admin.user.edit', compact('user'));
     }
 
-    public function update(Request $request, User $user){
+    public function update(Request $request, User $user)
+    {
         $request->validate([
             'name' => ['sometimes', 'required', 'string'],
             'email' => ['sometimes', 'required', 'email'],
@@ -28,41 +32,43 @@ class UserController extends Controller
             'avatar' => ['nullable', 'image'],
             'blocked' => ['sometimes', 'required', 'boolean'],
             'pin' => ['sometimes', 'required', 'string', 'max:4'],
-            'need_kyc' => ['sometimes', 'required', 'boolean']
+            'need_kyc' => ['sometimes', 'required', 'boolean'],
         ]);
 
-        if($request->hasFile('avatar')){
+        if ($request->hasFile('avatar')) {
             $path = $request->file('avatar')->store('public');
             $user->image()->updateOrCreate([], ['path' => $path]);
         }
 
-        try{
+        try {
             $user->update([
                 'name' => $request->name ? $request->name : $user->name,
                 'email' => $request->email ? $request->email : $user->email,
                 'phone' => $request->phone ? $request->phone : $user->phone,
                 'country' => $request->country ? $request->country : $user->country,
                 'state' => $request->state ? $request->state : $user->state,
-                'blocked' => !!$request->blocked,
+                'blocked' => (bool) $request->blocked,
                 'pin' => $request->pin ? $request->pin : $user->pin,
-                'need_kyc' => $request->need_kyc ? $request->need_kyc : $user->need_kyc,
+                'need_kyc' => $request->need_kyc ?? 1,
             ]);
 
-
             return redirect()->back()->with('message', 'Profile update successful');
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             report($e);
+
             return redirect()->back()->with('error', 'Something went wrong');
         }
     }
 
-    public function destroy(User $user){
-        DB::transaction(function() use($user){
+    public function destroy(User $user)
+    {
+        DB::transaction(function () use ($user) {
             $user->kyc()->delete();
             $user->transactions()->delete();
             $user->accounts()->delete();
             $user->delete();
         });
+
         return back()->with('message', 'Deleted');
     }
 }
