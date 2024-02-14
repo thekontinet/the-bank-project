@@ -2,8 +2,8 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Symfony\Component\HttpFoundation\Response;
 
 class CaptchaMiddleware
@@ -11,11 +11,14 @@ class CaptchaMiddleware
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response) $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, \Closure $next): Response
     {
-        if(!$request->session()->has('has_captcha')) return to_route('captcha.create');
-        return $next($request);
+        if ($request->session()->has('has_captcha') || Cache::has($request->ip())) {
+            return $next($request);
+        }
+
+        return to_route('captcha.create');
     }
 }

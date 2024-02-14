@@ -46,14 +46,14 @@ class CryptoWalletController extends Controller
             return Cache::get($cacheKey);
         }
 
-        $url = 'https://min-api.cryptocompare.com/data/top/totalvolfull?limit=10&tsym=USD&api_key='.env('CRYPTO_API_KEY');
+        $url = 'https://api.coinranking.com/v2/coins?referenceCurrencyUuid=Qwsogvtv82FCd';
         $response = Http::get($url);
 
         if (!$response->successful()) {
             return abort('400', 'Something went wrong please try again');
         }
 
-        $cryptos = $response->json('Data');
+        $cryptos = $response->json('data.coins');
         cache()->put($cacheKey, $cryptos, now()->addHours(12));
 
         return $cryptos;

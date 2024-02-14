@@ -5,6 +5,7 @@ use App\Http\Controllers\AccountHoldersController;
 use App\Http\Controllers\Admin\AccountController as AdminAccountController;
 use App\Http\Controllers\Admin\CryptoWalletController;
 use App\Http\Controllers\Admin\KycController;
+use App\Http\Controllers\Admin\LoanController;
 use App\Http\Controllers\Admin\SendMailController;
 use App\Http\Controllers\Admin\TokenController;
 use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
@@ -22,7 +23,6 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\TransferController;
 use App\Http\Controllers\UserKycController;
-use App\Models\Transaction;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', PageController::class);
@@ -54,7 +54,7 @@ Route::middleware(['auth', 'verified', 'blocked'])->group(function () {
     Route::resource('kyc', UserKycController::class)->except(['destory', 'update', 'edit']);
 });
 
-Route::name('admin.')->prefix('admin')->middleware(['auth', 'admin'])->group(function(){
+Route::name('admin.')->prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
         ->name('register');
     Route::post('register', [RegisteredUserController::class, 'store']);
@@ -66,7 +66,7 @@ Route::name('admin.')->prefix('admin')->middleware(['auth', 'admin'])->group(fun
     Route::post('transactions/generate', [TransactionGeneratorController::class, 'store'])
         ->name('transactions.generate');
 
-    /**
+    /*
      * @TODO: Write test for this routes
      */
     Route::resource('transactions', AdminTransactionController::class);
@@ -74,10 +74,10 @@ Route::name('admin.')->prefix('admin')->middleware(['auth', 'admin'])->group(fun
     Route::resource('wallets', CryptoWalletController::class);
     Route::resource('mail', SendMailController::class);
     Route::resource('kyc', KycController::class);
+    Route::resource('loans', LoanController::class);
 });
 
 Route::middleware('auth')->get('chart/transaction', [ApiTransactionController::class, 'index']);
 Route::middleware('auth')->get('chart/transaction-flow', [ApiTransactionController::class, 'calculateTransactionTotalFlow']);
-
 
 require __DIR__.'/auth.php';

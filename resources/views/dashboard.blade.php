@@ -5,14 +5,14 @@
         <div class="col-span-12">
             <div class="carousel w-full">
                 @foreach ($accounts as $account)
-                    <div id="account-{{$account->id}}" class="carousel-item w-full">
-                        <x-account-card :account="$account" :href="route('accounts.show', $account)"/>
+                    <div id="account-{{ $account->id }}" class="carousel-item w-full">
+                        <x-account-card :account="$account" :href="route('accounts.show', $account)" />
                     </div>
                 @endforeach
             </div>
             <div class="flex justify-center w-full py-2 gap-2">
                 @foreach ($accounts as $account)
-                    <a href="#account-{{$account->id}}" class="h-1 w-10 bg-black focus:bg-primary-500"></a>
+                    <a href="#account-{{ $account->id }}" class="h-1 w-10 bg-black focus:bg-primary-500"></a>
                 @endforeach
             </div>
         </div>
@@ -20,23 +20,54 @@
         <div class="card col-span-12 shadow-md py-8 dark:bg-slate-700">
             <h4 class="text-sm p-4">Quick Actions</h4>
             <div class="grid gap-4 grid-cols-2 lg:grid-cols-4 items-center px-4 lg:px-8 rounded">
-                <x-action-button :href="route('send.create')" title="Wire Transfer" icon="shuffle"/>
-                <x-action-button href="{{route('send.create')}}?dom" title="Transfer" icon="rotate-3d"/>
-                <x-action-button :href="route('deposit.create')" title="Deposit" icon="wallet"/>
-                <x-action-button :href="route('accounts.index')" title="Accounts" icon="layers"/>
-                <x-action-button :href="route('transactions.index')" title="Transactions" icon="receipt"/>
-                <x-action-button href="/cards" title="Cards" icon="credit-card"/>
-                <x-action-button :href="route('profile.edit')" title="Settings" icon="cog"/>
+                <x-action-button :href="route('send.create')" title="Wire Transfer" icon="shuffle" />
+                <x-action-button href="{{ route('send.create') }}?dom" title="Transfer" icon="rotate-3d" />
+                <x-action-button :href="route('deposit.create')" title="Deposit" icon="wallet" />
+                <x-action-button :href="route('accounts.index')" title="Accounts" icon="layers" />
+                <x-action-button :href="route('transactions.index')" title="Transactions" icon="receipt" />
+                <x-action-button href="/cards" title="Cards" icon="credit-card" />
+                <x-action-button :href="route('profile.edit')" title="Settings" icon="cog" />
                 @if (!auth()->user()->hasAdminRole())
-                    <x-action-button :href="route('kyc.create')" title="KYC Status" icon="user-check"/>
+                    <x-action-button :href="route('kyc.create')" title="KYC Status" icon="user-check" />
                 @else
-                    <x-action-button :href="route('admin.users.index')" title="Admin Panel" icon="user-cog"/>
+                    <x-action-button :href="route('admin.users.index')" title="Admin Panel" icon="user-cog" />
                 @endif
             </div>
         </div>
 
+        @if ($user->loan()->exists())
+            <div class="shadow-lg rounded-lg overflow-hidden border border-gray-200 col-span-full relative">
+                <div class="px-6 py-4">
+                    <div class="flex items-start justify-between">
+                        <p class="text-2xl text-gray-600">{{ money($user->loan->amount) }}</p>
+                        <i class="w-12 h-12 iconify text-slate-100 absolute top-4 right-4"
+                            data-icon="lucide:hand-coins"></i>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-sm text-gray-400 grid grid-cols-2 md:grid-cols-4 gap-y-4">
+                            <span><strong class="block font-medium">Interest Rate</strong>
+                                {{ $user->loan->interest_rate }}%</span>
+                            <span><strong class="block font-medium">Interest Amount</strong>
+                                {{ money($user->loan->interest_amount) }}</span>
+                            <span><strong class="block font-medium">Paid</strong>
+                                {{ money($user->loan->amount_paid) }}</span>
+                            <span><strong class="block font-medium">Remain</strong>
+                                {{ money($user->loan->total - $user->loan->amount_paid) }}</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="bg-gray-100 px-6 py-2">
+                    <p class="text-sm text-gray-600 grid grid-cols-2 lg:grid-cols-4">
+                        <span class="lg:col-span-3">Period: {{ $user->loan->duration_in_months }} Months</span>
+                        <span>Total: {{ money($user->loan->total) }}</span>
+                    </p>
+                </div>
+            </div>
+        @endif
+
+
         <div class="col-span-12">
-            <x-balance-summary-card :account="$user->accounts()->first()" :hasChart="($transactions->count() > 2)"/>
+            <x-balance-summary-card :account="$user->accounts()->first()" :hasChart="$transactions->count() > 2" />
         </div>
 
         <!--Grid item-->
