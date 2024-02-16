@@ -21,11 +21,11 @@ const LineChartConfig = {
     series: [{
         name: 'Transactions',
         data: [],
-    }, ],
+    },],
     xaxis: {
         type: 'datetime',
-        labels:{
-            formatter: function(value, timestamp, opts) {
+        labels: {
+            formatter: function (value, timestamp, opts) {
                 return moment(timestamp).format("MMMM D")
             }
         }
@@ -33,7 +33,7 @@ const LineChartConfig = {
     yaxis: {
         show: false
     },
-    colors:['#EF4444', '#000000', '#000000'],
+    colors: ['#EF4444', '#000000', '#000000'],
 }
 
 const pieChartConfig = {
@@ -51,7 +51,7 @@ const pieChartConfig = {
         }
     },
     labels: ['Money In', 'Money Out'],
-    colors:['#EF4444', '#EF8244', '#000000'],
+    colors: ['#EF4444', '#EF8244', '#000000'],
 }
 
 
@@ -59,49 +59,49 @@ document.addEventListener('alpine:init', () => {
     window.Alpine.data('transaction_chart', () => ({
         chart: null,
 
-        start:7,
+        start: 7,
 
         end: moment().format(),
 
-        init(){
+        init() {
             this.chart = new ApexCharts(this.$refs.container, LineChartConfig)
             this.chart.render()
             this.updateChart()
             this.$watch('start', () => this.updateChart())
         },
 
-        updateChart(){
+        updateChart() {
             const start = moment().subtract(this.start, 'days').format()
             fetch(`/chart/transaction?start=${start}`)
-            .then((response) => response.json())
-            .then((data) => {
-                this.chart.updateSeries([{
-                    data: data,
-                }]);
-            });
+                .then((response) => response.json())
+                .then((data) => {
+                    this.chart.updateSeries([{
+                        data: data,
+                    }]);
+                });
         }
     }))
 
     window.Alpine.data('transaction_flow', () => ({
         chart: null,
 
-        init(){
+        init() {
             this.chart = new ApexCharts(this.$refs.container, pieChartConfig)
             this.chart.render()
             this.updateChart()
             // this.$watch('start', () => this.updateChart())
         },
 
-        updateChart(){
+        updateChart() {
             const start = moment().subtract(this.start, 'days').format()
             fetch(`/chart/transaction-flow`)
-            .then((response) => response.json())
-            .then((data) => {
-                this.chart.updateSeries([
-                    data.total_deposit/100,
-                    data.total_withdrawal/100,
-                ]);
-            });
+                .then((response) => response.json())
+                .then((data) => {
+                    this.chart.updateSeries([
+                        data.total_deposit / 100,
+                        data.total_withdrawal / 100,
+                    ]);
+                });
         }
     }))
 })
