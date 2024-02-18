@@ -73,7 +73,7 @@ class Account extends Model
         $this->holders()->where('user_id', '<>', $this->user_id)->delete();
     }
 
-    public function credit(int $amount)
+    public function credit(float $amount)
     {
         if ($amount <= 0) {
             throw new TransactionException('Invalid amount specified');
@@ -81,26 +81,22 @@ class Account extends Model
 
         $amount = BigInteger::of($amount);
 
-        $newBalance = $amount->multipliedBy(100)->plus($this->balance);
+        $newBalance = $amount->multipliedBy(100)->plus($this->balance ?? 0);
 
         return $this->update(['balance' => (string) $newBalance]);
     }
 
-    public function debit(int $amount)
+    public function debit(float $amount)
     {
-        $amount = abs($amount);
-
         if ($amount <= 0) {
             throw new TransactionException('Invalid amount specified');
         }
 
-        if ($amount > $this->balance) {
-            throw new TransactionException('Insufficient balance');
-        }
+        $amount = BigInteger::of($amount);
 
-        $this->balance -= $amount * 100;
+        $newBalance = BigInteger::of($this->balance ?? 0)->minus($amount->multipliedBy(100));
 
-        return $this->save();
+        return $this->update(['balance' => (string) $newBalance]);
     }
 
     public function hasToken()

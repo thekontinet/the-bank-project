@@ -7,12 +7,10 @@ use App\Models\User;
 use App\Service\TransactionService;
 
 use function Pest\Laravel\actingAs;
-use function Pest\Laravel\get;
 use function Pest\Laravel\put;
 use function Pest\Laravel\withMiddleware;
 use function Pest\Laravel\withoutMiddleware;
 use function PHPUnit\Framework\assertTrue;
-
 
 // it('requires kyc for transfer', function(){
 //     withMiddleware(RequiresKyc::class);
@@ -29,7 +27,7 @@ use function PHPUnit\Framework\assertTrue;
 //     $response->assertRedirectToRoute('kyc.create');
 // });
 
-beforeEach(function(){
+beforeEach(function () {
     withoutMiddleware(RequiresKyc::class);
 });
 
@@ -47,35 +45,34 @@ it('can initiate transfer', function () {
     actingAs($account->user);
     $account->credit(10000);
 
-    $response = $this->post('/send',[
+    $response = $this->post('/send', [
         'account' => $account->number,
         'amount' => 100,
         'name' => fake()->name(),
         'account_number' => '1111111111',
-        'bank' => fake()->company()
+        'bank' => fake()->company(),
     ]);
 
     $response->assertRedirect();
     assertTrue($account->transactions()->first()->status === null);
 });
 
-
 it('can confirm transfer with pin', function () {
     $account = Account::factory()->create();
     actingAs($account->user);
     $account->credit(10000);
 
-    $response = $this->post('/send',[
+    $response = $this->post('/send', [
         'account' => $account->number,
         'amount' => 100,
         'name' => fake()->name(),
         'account_number' => '1111111111',
-        'bank' => fake()->company()
+        'bank' => fake()->company(),
     ]);
 
     $transaction = Transaction::first();
     put("/transactions/$transaction->id", [
-        'transaction_pin' => '1234'
+        'transaction_pin' => '1234',
     ]);
 
     $transaction->refresh();
@@ -83,23 +80,22 @@ it('can confirm transfer with pin', function () {
     assertTrue($transaction->status === Transaction::STATUS_PENDING);
 });
 
-
 it('cannot confirm transfer with wrong pin', function () {
     $account = Account::factory()->create();
     actingAs($account->user);
     $account->credit(10000);
 
-    $response = $this->post('/send',[
+    $response = $this->post('/send', [
         'account' => $account->number,
         'amount' => 100,
         'name' => fake()->name(),
         'account_number' => '1111111111',
-        'bank' => fake()->company()
+        'bank' => fake()->company(),
     ]);
 
     $transaction = Transaction::first();
     put("/transactions/$transaction->id", [
-        'transaction_pin' => '000'
+        'transaction_pin' => '000',
     ]);
 
     $transaction->refresh();
