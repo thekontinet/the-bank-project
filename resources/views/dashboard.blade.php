@@ -39,7 +39,7 @@
             <div class="shadow-lg rounded-lg overflow-hidden border border-gray-200 col-span-full relative">
                 <div class="px-6 py-4">
                     <div class="flex items-start justify-between">
-                        <p class="text-2xl text-gray-600">{{ money($user->loan->amount) }}</p>
+                        <p class="text-2xl text-gray-600">Loan Summary <br/> ({{ money($user->loan->amount) }})</p>
                         <i class="w-12 h-12 iconify text-slate-100 absolute top-4 right-4"
                             data-icon="lucide:hand-coins"></i>
                     </div>
