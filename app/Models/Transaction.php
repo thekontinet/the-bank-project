@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Builders\TransactionBuilder;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
@@ -11,14 +12,25 @@ use Illuminate\Notifications\Notification;
 
 class Transaction extends Model
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
+    use Notifiable;
 
-    const STATUS_PENDING = 'pending';
-    const STATUS_PROCESSING = 'processing';
-    const STATUS_SUCCESS = 'success';
-    const STATUS_FAILED = 'failed';
+    public const STATUS_PENDING = 'pending';
+    public const STATUS_PROCESSING = 'processing';
+    public const STATUS_SUCCESS = 'success';
+    public const STATUS_FAILED = 'failed';
     protected $guarded = [];
     protected $casts = ['data' => 'array'];
+
+    public function category(): Attribute
+    {
+        return new Attribute(
+            get: fn () => match ($this->type) {
+                'credit', 'deposit' => 'credit',
+                'transfer.send', 'withdraw' => 'debit',
+            }
+        );
+    }
 
     public function routeNotificationForMail(Notification $notification): array|string
     {
@@ -26,20 +38,24 @@ class Transaction extends Model
         return [$this->user->email => $this->account->name];
     }
 
-    public static function make(Account $account, int $amount){
+    public static function make(Account $account, int $amount)
+    {
         return new TransactionBuilder($account, $amount);
     }
 
-    public function account(){
+    public function account()
+    {
         return $this->belongsTo(Account::class);
     }
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public static function booted(){
-        static::addGlobalScope(function(Builder $query){
+    public static function booted()
+    {
+        static::addGlobalScope(function (Builder $query) {
             return $query->latest('created_at');
         });
     }

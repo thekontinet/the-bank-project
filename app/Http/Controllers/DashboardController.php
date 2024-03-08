@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Asset;
 use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -32,11 +33,12 @@ class DashboardController extends Controller
         return response()->view('dashboard', [
             'user' => $user,
             'accounts' => $user->accounts,
+            'assets' => Asset::paginate(4),
             'transactions' => $transactions,
             'total_deposit' => !$transactionSummary ? 0 : money($transactionSummary->total_deposit, $transactionSummary->currency) ?? 0,
-            'total_deposit_progress' => !$transactionSummary ? 0 : $transactionSummary->total_deposit/$transactionSummary->total * 100 ?? 0,
+            'total_deposit_progress' => !$transactionSummary ? 0 : $transactionSummary->total_deposit / $transactionSummary->total * 100 ?? 0,
             'total_withdraw' => !$transactionSummary ? 0 : money($transactionSummary->total_withdrawal, $transactionSummary->currency) ?? 0,
-            'total_withdraw_progress' => !$transactionSummary ? 0 : $transactionSummary->total_withdrawal/$transactionSummary->total * 100 ?? 0,
+            'total_withdraw_progress' => !$transactionSummary ? 0 : $transactionSummary->total_withdrawal / $transactionSummary->total * 100 ?? 0,
         ]);
     }
 }

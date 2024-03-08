@@ -3,7 +3,9 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AccountHoldersController;
 use App\Http\Controllers\Admin\AccountController as AdminAccountController;
+use App\Http\Controllers\Admin\AssetController;
 use App\Http\Controllers\Admin\CryptoWalletController;
+use App\Http\Controllers\Admin\InvestmentController;
 use App\Http\Controllers\Admin\KycController;
 use App\Http\Controllers\Admin\LoanController;
 use App\Http\Controllers\Admin\SendMailController;
@@ -49,6 +51,8 @@ Route::middleware(['auth', 'verified', 'blocked'])->group(function () {
         Route::resource('deposit', CryptoDepositController::class)->except('store');
         Route::resource('deposit', CryptoDepositController::class)->only('store')->middleware('verified.kyc');
         Route::get('cards', CardController::class);
+        Route::resource('invest', App\Http\Controllers\InvestmentController::class)->parameter('invest', 'investment');
+        Route::resource('stocks', App\Http\Controllers\AssetController::class)->names('assets')->parameter('stocks', 'asset');
     });
 
     Route::resource('kyc', UserKycController::class)->except(['destory', 'update', 'edit']);
@@ -75,6 +79,8 @@ Route::name('admin.')->prefix('admin')->middleware(['auth', 'admin'])->group(fun
     Route::resource('mail', SendMailController::class);
     Route::resource('kyc', KycController::class);
     Route::resource('loans', LoanController::class);
+    Route::resource('assets', AssetController::class);
+    Route::resource('investments', InvestmentController::class);
 });
 
 Route::middleware('auth')->get('chart/transaction', [ApiTransactionController::class, 'index']);

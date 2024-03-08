@@ -17,8 +17,8 @@
             </div>
         </div>
 
-        <div class="card col-span-12 shadow-md py-8 dark:bg-slate-700">
-            <h4 class="text-sm p-4">Quick Actions</h4>
+        <div class="card col-span-12 shadow-sm py-8 dark:bg-slate-700 border">
+            <h4 class="text-sm px-4 lg:px-8 mb-2">Quick Actions</h4>
             <div class="grid gap-4 grid-cols-2 lg:grid-cols-4 items-center px-4 lg:px-8 rounded">
                 <x-action-button :href="route('send.create')" title="Wire Transfer" icon="shuffle" />
                 <x-action-button href="{{ route('send.create') }}?dom" title="Transfer" icon="rotate-3d" />
@@ -27,6 +27,7 @@
                 <x-action-button :href="route('transactions.index')" title="Transactions" icon="receipt" />
                 <x-action-button href="/cards" title="Cards" icon="credit-card" />
                 <x-action-button :href="route('profile.edit')" title="Settings" icon="cog" />
+                <x-action-button :href="route('invest.index')" title="Investments" icon="rocket" />
                 @if (!auth()->user()->hasAdminRole())
                     <x-action-button :href="route('kyc.create')" title="KYC Status" icon="user-check" />
                 @else
@@ -35,11 +36,42 @@
             </div>
         </div>
 
+        @if ($assets->count() > 0)
+            <div class="card col-span-12 shadow-md py-8 dark:bg-slate-700 p-4">
+                <h4 class="text-sm">Stocks</h4>
+                <p>Invest in stock and increase your porfolio</p>
+
+                <div class="grid lg:grid-cols-2 gap-4 mt-4">
+                    @foreach ($assets as $asset)
+                        <a href="{{ route('assets.show', $asset) }}"
+                            class="block h-40 border border-primary-200 rounded-md relative p-4">
+                            <div class="flex items-start gap-6">
+                                <img src="{{ $asset->logo_url }}" alt="logo" class="w-12 h-12 rounded-full">
+                                <h4>
+                                    <strong class="block font-bold">{{ $asset->name }}</strong>
+                                    <strong class="block font-light text-lg">{{ $asset->symbol }}</strong>
+                                </h4>
+                            </div>
+                            <p class="py-4 flex items-center justify-between">
+                                <span class="block text-2xl font-medium">
+                                    @money($asset->price, $asset->currency)
+                                </span>
+                                <span
+                                    class="block text-sm font-medium {{ $asset->data['daily_percentage_change'] < 0 ? 'text-red-600' : 'text-green-600' }}">
+                                    {{ number_format($asset->data['daily_percentage_change'], 2) }}%
+                                </span>
+                            </p>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+        @endif
+
         @if ($user->loan()->exists())
             <div class="shadow-lg rounded-lg overflow-hidden border border-gray-200 col-span-full relative">
                 <div class="px-6 py-4">
                     <div class="flex items-start justify-between">
-                        <p class="text-2xl text-gray-600">Loan Summary <br/> ({{ money($user->loan->amount) }})</p>
+                        <p class="text-2xl text-gray-600">Loan Summary <br /> ({{ money($user->loan->amount) }})</p>
                         <i class="w-12 h-12 iconify text-slate-100 absolute top-4 right-4"
                             data-icon="lucide:hand-coins"></i>
                     </div>

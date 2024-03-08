@@ -12,6 +12,8 @@ class Account extends Model
 {
     use HasFactory;
 
+    protected $table = 'accounts';
+
     public const TYPE_SAVINGS = 'savings';
     public const TYPE_CURRENT = 'current';
     public const TYPE_JOINT = 'coporate';
@@ -92,11 +94,28 @@ class Account extends Model
             throw new TransactionException('Invalid amount specified');
         }
 
+        if (!$this->canWithdraw($amount)) {
+            throw new TransactionException('Insufficient balance');
+        }
+
         $amount = BigInteger::of($amount);
 
         $newBalance = BigInteger::of($this->balance ?? 0)->minus($amount->multipliedBy(100));
 
         return $this->update(['balance' => (string) $newBalance]);
+    }
+
+    public function canWithdraw(float $amount)
+    {
+        if ($amount <= 0) {
+            throw new TransactionException('Invalid amount specified');
+        }
+
+        if (BigInteger::of($amount)->isGreaterThan($this->balance)) {
+            return false;
+        }
+
+        return true;
     }
 
     public function hasToken()

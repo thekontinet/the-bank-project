@@ -44,6 +44,12 @@
                                 <span class="text-sm dark:text-muted-100">Accounts</span>
                             </a>
                             <a class="flex items-center gap-2 pt-2"
+                                href='{{ route('admin.investments.index', ['user_id' => $user->id]) }}'
+                                title='user loan'>
+                                <i class="w-6 h-6 iconify text-slate-300" data-icon="lucide:rocket"></i>
+                                <span class="text-sm dark:text-muted-100">Investment</span>
+                            </a>
+                            <a class="flex items-center gap-2 pt-2"
                                 href='{{ route('admin.loans.create', ['user_id' => $user->id]) }}' title='user loan'>
                                 <i class="w-6 h-6 iconify text-slate-300" data-icon="lucide:hand-coins"></i>
                                 <span class="text-sm dark:text-muted-100">Loan</span>

@@ -4,6 +4,20 @@
 Dear {{$transaction->account->name}},
 
 This is a summary of a transaction that has occurred on your account.
+@if ($transaction->type === 'withdraw')
+<x-mail::table>
+|                |                                                                                             |
+|----------------|---------------------------------------------------------------------------------------------|
+| Date           | {{$transaction->created_at->format('y-m-d')}}                                               |
+| Account Name   | {{$transaction->account->name}}                                                             |
+| Account Number | {{$transaction->account->number}}                                                           |
+| Amount         | @money($transaction->amount, $transaction->currency)                                        |
+| Receiver       | {{$transaction->data['account_name'] ?? ''}} {{$transaction->data['account_number'] ?? ''}} |
+| Receiver Bank  | {{$transaction->data['bank'] ?? ''}}                                                        |
+| Credit/Debit   | Debit                                                                                      |
+| Description    | {{$transaction->description}}                                                               |
+</x-mail::table>
+@endif
 
 @if ($transaction->type === 'transfer.send')
 <x-mail::table>
