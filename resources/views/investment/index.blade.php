@@ -7,7 +7,7 @@
             </div>
         </header>
 
-        <div class="py-4 grid grid-cols-4 gap-4">
+        <div class="py-4 grid lg:grid-cols-4 gap-4">
             @forelse ($investments as $investment)
                 <a href="{{ route('assets.show', $investment->asset->id) }}"
                     class="flex flex-col gap-1 overflow-hidden border rounded">
