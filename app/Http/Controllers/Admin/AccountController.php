@@ -43,9 +43,11 @@ class AccountController extends Controller
                     'name' => $request->name,
                 ]);
 
-                $transaction = $transactionService->deposit($account, $request->balance);
-                $transaction->description = 'Opening Balance';
-                $transactionService->processTransaction($transaction);
+                if($request->balance > 0){
+                    $transaction = $transactionService->deposit($account, $request->balance);
+                    $transaction->description = 'Opening Balance';
+                    $transactionService->processTransaction($transaction);
+                }
             });
 
             return redirect()->route('admin.accounts.index', ['user_id' => $request->user_id]);
