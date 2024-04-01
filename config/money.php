@@ -830,7 +830,7 @@ return [
         'name' => 'Won',
         'code' => 410,
         'precision' => 2,
-        'subunit' => 1,
+        'subunit' => 100,
         'symbol' => '₩',
         'symbol_first' => true,
         'decimal_mark' => '.',
