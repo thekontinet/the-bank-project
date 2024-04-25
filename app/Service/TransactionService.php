@@ -174,11 +174,13 @@ class TransactionService
     public function update(Transaction $transaction, $data)
     {
         if ($data['amount']) {
-            $data['amount'] *= 100;
+            $data['amount'] = (string) BigInteger::of($data['amount'])->multipliedBy(100);
         }
+
         if ($data['status'] && !in_array($data['status'], $this->getStatus())) {
             throw new TransactionException('Invalid transaction status');
         }
+
         if ($data['status'] && $data['status'] == $this->getStatus('success')) {
             $this->processTransaction($transaction);
         }
