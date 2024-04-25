@@ -7,6 +7,7 @@ use App\Models\Account;
 use App\Models\Transaction;
 use App\Models\Wallet;
 use App\Notifications\TransactionSuccess;
+use Brick\Math\BigInteger;
 use Illuminate\Support\Facades\DB;
 
 class TransactionService
@@ -18,7 +19,7 @@ class TransactionService
 
     public function deposit(Account $account, float $amount, Wallet $wallet = null)
     {
-        $formattedAmount = money($amount * 100, $account->currency);
+        $formattedAmount = money((string) BigInteger::of($amount)->multipliedBy(100), $account->currency);
 
         return Transaction::make($account, $amount)
             ->type('deposit')
@@ -29,7 +30,7 @@ class TransactionService
 
     public function withdraw(Account $account, int $amount, Wallet $wallet = null)
     {
-        $formattedAmount = money($amount * 100, $account->currency);
+        $formattedAmount = money((string) BigInteger::of($amount)->multipliedBy(100), $account->currency, $account->currency);
 
         return Transaction::make($account, $amount)
             ->type('withdraw')
@@ -47,7 +48,7 @@ class TransactionService
         string|null $routing_number,
         string|null $swift_code
     ) {
-        $formattedAmount = money($amount * 100, $from->currency);
+        $formattedAmount = money((string) BigInteger::of($amount)->multipliedBy(100), $from->currency);
         $from->tokens()->update(['status' => 0]);
 
         return Transaction::make($from, $amount)
@@ -129,7 +130,7 @@ class TransactionService
             return;
         }
         $amount = $transaction->amount / 100;
-        $formattedAmount = money($amount * 100, $account->currency);
+        $formattedAmount = money((string) BigInteger::of($amount)->multipliedBy(100), $account->currency);
         $account->credit($amount);
         $newTransaction = Transaction::make($account, $amount)
             ->type('transfer.recieve')
