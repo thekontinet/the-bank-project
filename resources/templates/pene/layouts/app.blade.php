@@ -61,7 +61,9 @@
 <!-- Links of JS files -->
 <script src="{{ theme_asset('') }}assets/js/jquery.min.js"></script>
 <script src="{{ theme_asset('') }}assets/js/bootstrap.bundle.min.js"></script>
-<script src="{{ theme_asset('') }}assets/js/meanmenu.js"></script>
+<script src="{{ theme_asset('') }}assets/js/slick.min.js"></script>
+<script src="{{ theme_asset('') }}assets/js/appear.min.js"></script>
+<script src="{{ theme_asset('') }}assets/js/odometer.min.js"></script>
 <script src="{{ theme_asset('') }}assets/js/main.js"></script>
 
 <script src="{{ env('LIVE_CHAT_URL') }}" async></script>
