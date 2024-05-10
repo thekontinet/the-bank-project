@@ -42,44 +42,26 @@
     <link rel="manifest" href="/images/site.webmanifest">
 </head>
 
-<!-- Preloader -->
-<div class="preloader">
-    <div class="loader">
-        <div class="shadow"></div>
-        <div class="box"></div>
-    </div>
-</div>
-<!-- End Preloader -->
-<div class="position-absolute px-2 py-4" style="right: 0;">
+<div class="position-fixed px-2 py-4" style="bottom: 0; right: 0">
     <div id="google_translate_element"></div>
 </div>
-@yield('content')
-
-<div class="go-top"><i class="fas fa-arrow-up"></i></div>
 
 <!-- Dark/Light Toggle -->
-<div class="dark-version" style="bottom: 20px; top: auto; position: absolute;">
+<div class="dark-version" style="bottom: 20px; top: auto; position: fixed;">
     <label id="switch" class="switch">
         <input type="checkbox" onchange="toggleTheme()" id="slider">
         <span class="slider round"></span>
     </label>
 </div>
 
+@yield('content')
+
+<div class="go-top"><i class="fas fa-arrow-up"></i></div>
+
 <!-- Links of JS files -->
 <script src="{{ theme_asset('') }}assets/js/jquery.min.js"></script>
 <script src="{{ theme_asset('') }}assets/js/bootstrap.bundle.min.js"></script>
 <script src="{{ theme_asset('') }}assets/js/meanmenu.js"></script>
-<script src="{{ theme_asset('') }}assets/js/nice-select.min.js"></script>
-<script src="{{ theme_asset('') }}assets/js/slick.min.js"></script>
-<script src="{{ theme_asset('') }}assets/js/magnific-popup.min.js"></script>
-<script src="{{ theme_asset('') }}assets/js/appear.min.js"></script>
-<script src="{{ theme_asset('') }}assets/js/odometer.min.js"></script>
-<script src="{{ theme_asset('') }}assets/js/owl.carousel.min.js"></script>
-<script src="{{ theme_asset('') }}assets/js/parallax.min.js"></script>
-<script src="{{ theme_asset('') }}assets/js/wow.min.js"></script>
-<script src="{{ theme_asset('') }}assets/js/form-validator.min.js"></script>
-<script src="{{ theme_asset('') }}assets/js/contact-form-script.js"></script>
-<script src="{{ theme_asset('') }}assets/js/jquery.ajaxchimp.min.js"></script>
 <script src="{{ theme_asset('') }}assets/js/main.js"></script>
 
 <script src="{{ env('LIVE_CHAT_URL') }}" async></script>
