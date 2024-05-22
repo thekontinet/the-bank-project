@@ -26,7 +26,7 @@ class Transaction extends Model
     {
         return new Attribute(
             get: fn () => match ($this->type) {
-                'credit', 'deposit' => 'credit',
+                'credit', 'deposit', 'transfer.recieve' => 'credit',
                 'transfer.send', 'withdraw', 'debit' => 'debit',
             }
         );
