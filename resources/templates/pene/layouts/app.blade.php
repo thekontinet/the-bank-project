@@ -42,7 +42,7 @@
     <link rel="manifest" href="/images/site.webmanifest">
 </head>
 
-<div class="position-fixed px-2 py-4" style="bottom: 0; right: 0">
+<div class="position-fixed px-2 py-2" style="top: 12px; right: 0; z-index:1000">
     <div id="google_translate_element"></div>
 </div>
 

@@ -27,17 +27,17 @@
                 </a>
 
                 <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav mx-auto">
                         <li class="nav-item">
                             <a href="/" class="nav-link active">Home</a>
                         </li>
                         <li class="nav-item"><a href="{{ route('page', 'about') }}" class="nav-link">About Us</a></li>
-                        <li class="nav-item"><a href="{{ route('page', 'contact') }}" class="nav-link">Contact Us</a>
-                        </li>
+                        <li class="nav-item"><a href="{{ route('page', 'contact') }}" class="nav-link">Contact Us</a></li>
+                        <li class="nav-item"><a href="{{ route('login') }}" class="login-btn"><i class="flaticon-user"></i> E-Banking</a></li>
                     </ul>
 
                     <div class="others-options">
-                        <a href="{{ route('login') }}" class="login-btn"><i class="flaticon-user"></i> E-Banking</a>
+
                     </div>
                 </div>
             </nav>
