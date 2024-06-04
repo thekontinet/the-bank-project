@@ -11,9 +11,8 @@ use Illuminate\Validation\Rule;
 
 class TransactionController extends Controller
 {
-    public function __construct(private TransactionService $transactionService)
-    {
-    }
+    public function __construct(private readonly TransactionService $transactionService)
+    {}
 
     public function index()
     {

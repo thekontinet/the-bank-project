@@ -11,6 +11,9 @@
                     </th>
                 @endif()
                 <th class="w-1/5 px-4 pb-3 font-sans text-xs font-semibold text-left text-muted-400 dark:text-muted-300">
+                    <span>Ref</span>
+                </th>
+                <th class="w-1/5 px-4 pb-3 font-sans text-xs font-semibold text-left text-muted-400 dark:text-muted-300">
                     <span>Date</span>
                 </th>
                 <th class="w-2/5 px-4 pb-3 font-sans text-xs font-semibold text-left text-muted-400 dark:text-muted-300">
@@ -46,6 +49,11 @@
                             </td>
                         @endif
                         <td class="px-4 py-2">
+                            <span class="font-sans text-sm uppercase font-medium leading-none text-muted-500 dark:text-muted-300">
+                                {{ $transaction->reference }}
+                            </span>
+                        </td>
+                            <td class="px-4 py-2">
                             <span class="font-sans text-sm font-medium leading-none text-muted-500 dark:text-muted-300">
                                 {{ $transaction->created_at->format('d M Y | h:i a') }}
                             </span>

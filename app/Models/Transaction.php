@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Str;
 
 class Transaction extends Model
 {
@@ -57,6 +58,13 @@ class Transaction extends Model
     {
         static::addGlobalScope(function (Builder $query) {
             return $query->latest('created_at');
+        });
+
+        static::creating(function(Model $model){
+            if(!$model->getAttribute('reference')){
+                $reference = strtolower(substr(config('app.name'), 0, 3) . Str::random(8) . time() . Str::random(8));
+                $model->setAttribute('reference', $reference);
+            }
         });
     }
 }

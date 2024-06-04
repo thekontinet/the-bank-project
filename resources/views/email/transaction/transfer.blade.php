@@ -8,6 +8,7 @@ This is a summary of a transaction that has occurred on your account.
 <x-mail::table>
 |                |                                                                                             |
 |----------------|---------------------------------------------------------------------------------------------|
+| Reference      | {{$transaction->reference}}                                                                 |
 | Date           | {{$transaction->created_at->format('y-m-d')}}                                               |
 | Account Name   | {{$transaction->account->name}}                                                             |
 | Account Number | {{$transaction->account->number}}                                                           |
