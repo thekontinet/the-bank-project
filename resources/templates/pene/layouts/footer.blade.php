@@ -52,8 +52,10 @@
                         <li><span>Location:</span> {{ config('app.name') }}</li>
                         <li><span>Email:</span> <a
                                 href="mailto:{{ config('app.email') }}"><span>{{ config('app.email') }}</span></a></li>
-                        <li><span>Phone:</span> <a href="tel:{{ config('app.phone') }}">{{ config('app.phone') }}</a>
-                        </li>
+                        @if(config('app.phone'))
+                            <li><span>Phone:</span> <a href="tel:{{ config('app.phone') }}">{{ config('app.phone') }}</a>
+                            </li>
+                        @endif
                     </ul>
                 </div>
             </div>

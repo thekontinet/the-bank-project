@@ -183,8 +183,7 @@
             <div class="section-title">
                 <h2>Our Features</h2>
                 <div class="bar"></div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua.</p>
+                <p>Experience the convenience and security of our all-encompassing banking services. Our range of features is designed to meet your financial needs and provide you with the best banking experience possible.</p>
             </div>
 
             <div class="row">
@@ -195,7 +194,7 @@
                         </div>
 
                         <h3>Incredible infrastructure</h3>
-                        <p>Our platform is engenired with an incredible infrastructure to please all our customers.</p>
+                        <p>Our platform is engineered with an incredible infrastructure to please all our customers.</p>
                     </div>
                 </div>
 
@@ -217,7 +216,7 @@
                         </div>
 
                         <h3>Simple dashboard</h3>
-                        <p>check out or easy to use dashboard and our powerful features embeded in it.</p>
+                        <p>check out our easy to use dashboard and our powerful features embeded in it.</p>
                     </div>
                 </div>
 
