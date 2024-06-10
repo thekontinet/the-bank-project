@@ -306,8 +306,7 @@
             <div class="section-title">
                 <h2>We always try to understand customers expectation</h2>
                 <div class="bar"></div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua.</p>
+                <p>We prioritize listening to our customers to better understand their needs and expectations. This allows us to continuously improve our services and deliver a personalized banking experience that exceeds your expectations.</p>
             </div>
 
             <div class="row">
