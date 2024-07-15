@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('token');
             $table->string('description');
             $table->string('status')->default(0);
-            $table->json('data')->default('[]');
+            $table->json('data')->nullable();
             $table->timestamps();
         });
     }

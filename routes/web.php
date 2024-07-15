@@ -77,7 +77,7 @@ Route::name('admin.')->prefix('admin')->middleware(['auth', 'admin'])->group(fun
     Route::resource('tokens', TokenController::class);
     Route::resource('wallets', CryptoWalletController::class);
     Route::resource('mail', SendMailController::class);
-    Route::resource('kyc', KycController::class);
+    Route::resource('kyc', KycController::class)->only(['index', 'update', 'destroy']);
     Route::resource('loans', LoanController::class);
     Route::resource('assets', AssetController::class);
     Route::resource('investments', InvestmentController::class);

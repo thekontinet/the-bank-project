@@ -12,4 +12,9 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script type="module" crossorigin src="/assets/main-704af5af.js"></script>
     @stack('styles')
+    <style>
+        [x-cloak]{
+            display:none
+        }
+    </style>
   </head>

@@ -7,6 +7,7 @@ use Brick\Math\BigInteger;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Nette\Utils\Random;
 
 class Account extends Model
 {
@@ -53,12 +54,12 @@ class Account extends Model
         }
     }
 
-    public static function generateAccountNumber()
+    public static function generateAccountNumber(): string
     {
         $accountNumber = null;
 
         while (!$accountNumber) {
-            $number = mt_rand(1000000000, 9999999999);
+            $number = '33' . Random::generate(8, '0-9');
 
             $exists = Account::where('number', $number)->exists();
 

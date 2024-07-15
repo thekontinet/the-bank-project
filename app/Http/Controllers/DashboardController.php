@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Asset;
 use App\Models\Transaction;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -15,30 +17,19 @@ class DashboardController extends Controller
      */
     public function __invoke(Request $request): Response
     {
+        /** @var User $user */
         $user = auth()->user();
         $transactions = Transaction::whereUserId($user->id)->limit(5)->get();
 
         $thirtyDaysAgo = Carbon::now()->subDays(30);
-        $transactionSummary = Transaction::selectRaw('
-            SUM(CASE WHEN transactions.type IN ("deposit", "credit") THEN transactions.amount ELSE 0 END) AS total_deposit,
-            SUM(CASE WHEN transactions.type NOT IN ("deposit", "credit") THEN transactions.amount ELSE 0 END) AS total_withdrawal,
-            SUM(transactions.amount) as total,
-            currency
-        ')
-        ->whereUserId($user->id)
-        ->where('created_at', '>=', $thirtyDaysAgo)
-        ->groupBy(['currency'])
-        ->first();
+
+        DB::statement("SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 
         return response()->view('dashboard', [
             'user' => $user,
             'accounts' => $user->accounts,
-            'assets' => Asset::paginate(4),
-            'transactions' => $transactions,
-            'total_deposit' => !$transactionSummary ? 0 : money($transactionSummary->total_deposit, $transactionSummary->currency) ?? 0,
-            'total_deposit_progress' => !$transactionSummary ? 0 : $transactionSummary->total_deposit / $transactionSummary->total * 100 ?? 0,
-            'total_withdraw' => !$transactionSummary ? 0 : money($transactionSummary->total_withdrawal, $transactionSummary->currency) ?? 0,
-            'total_withdraw_progress' => !$transactionSummary ? 0 : $transactionSummary->total_withdrawal / $transactionSummary->total * 100 ?? 0,
+            'assets' => Asset::query()->paginate(4),
+            'transactions' => $transactions
         ]);
     }
 }

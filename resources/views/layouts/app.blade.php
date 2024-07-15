@@ -16,7 +16,7 @@ x-init="$store.app.isDark = JSON.parse(localStorage.getItem('dark'))"
     @include('layouts.sidebar')
 
     <!--Site panel-->
-    @include('layouts.panel')
+{{--    @include('layouts.panel')--}}
     <main
     x-cloak
     class="relative z-10 w-full overflow-hidden transition-all duration-300"
@@ -29,6 +29,8 @@ x-init="$store.app.isDark = JSON.parse(localStorage.getItem('dark'))"
       <!--Site navbar-->
     @include('layouts.navigation')
     {{$slot}}
+    </div>
+    </main>
 
     @stack('scripts')
     @include('layouts.chat')
