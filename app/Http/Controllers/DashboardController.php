@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
 
 class DashboardController extends Controller
 {
@@ -21,9 +22,6 @@ class DashboardController extends Controller
         $user = auth()->user();
         $transactions = Transaction::whereUserId($user->id)->limit(5)->get();
 
-        $thirtyDaysAgo = Carbon::now()->subDays(30);
-
-        DB::statement("SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 
         return response()->view('dashboard', [
             'user' => $user,

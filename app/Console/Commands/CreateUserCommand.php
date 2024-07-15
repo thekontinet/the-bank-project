@@ -36,13 +36,17 @@ class CreateUserCommand extends Command
 
         $isAdmin = $this->confirm('Is this an admin account ?');
         $password = $this->secret('Password');
+        $pin = $this->secret('pin');
         $factory = User::factory();
 
         $factory->create([
             'name' => $name,
             'email' => $email,
             'password' => Hash::make($password),
-            'is_admin' => $isAdmin
+            'is_admin' => $isAdmin,
+            'pin' => $pin
         ]);
+
+        $this->info('Account created');
     }
 }
