@@ -152,7 +152,7 @@ class Account extends Model
     protected static function booted(): void
     {
         static::addGlobalScope(function ($q) {
-            /** @var App\Model\User $user */
+            /** @var User $user */
             $user = auth()->user();
             if ($user && !$user->hasAdminRole()) {
                 return $q->where('accounts.user_id', $user->id);
