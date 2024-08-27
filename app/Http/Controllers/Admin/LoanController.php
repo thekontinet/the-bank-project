@@ -22,10 +22,10 @@ class LoanController extends Controller
     {
         $validated = $request->validate([
             'user_id' => ['required', 'exists:users,id'],
-            'amount' => ['required', 'integer'],
-            'amount_paid' => ['required', 'integer'],
-            'interest_rate' => ['required', 'integer'],
-            'duration_in_months' => ['required', 'integer'],
+            'amount' => ['required', 'numeric'],
+            'amount_paid' => ['required', 'numeric'],
+            'interest_rate' => ['required', 'numeric'],
+            'duration_in_months' => ['required', 'numeric'],
         ]);
 
         Loan::query()->updateOrCreate($request->only(['user_id']), $validated);
