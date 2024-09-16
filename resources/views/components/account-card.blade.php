@@ -1,7 +1,7 @@
 @props(['account', 'href' => null, 'hasAvatar' => false])
 
 <div
-    class="py-5 px-4 flex rounded-lg text-white bg-gradient-to-tr from-primary-400 to-primary-600 dark:from-slate-900 dark:to-slate-600 w-full">
+    class="py-5 px-4 flex rounded-lg text-gray-50 bg-gradient-to-tr from-primary-500 to-primary-700 dark:from-slate-900 dark:to-slate-600 w-full">
     <div class="flex-1">
         <div class="flex items-center gap-2">
             @if ($hasAvatar)
@@ -9,12 +9,11 @@
                     src="{{ $account->user->avatar }}" alt="User photo" width="40" height="40">
             @endif
             <div>
-                <h4>{{ ucfirst($account->type) }} Account</h4>
-                <p class="font-mono text-sm">{{ $account->number }}</p>
+                <h4>{{ ucfirst($account->type) }} - {{ $account->number }}</h4>
             </div>
         </div>
-        <p class="font-bold font-mono text-2xl my-2 tracking-tighter">@money($account->balance, $account->currency)</p>
-        <p class="text-sm text-primary-200 font-semibold">{{ $account->name }}</p>
+        <p class="font-bold text-2xl my-2">@money($account->balance, $account->currency)</p>
+        <p class="text-sm capitalize font-semibold">{{ $account->name }}</p>
     </div>
     @if ($href)
         <div class="text-right">

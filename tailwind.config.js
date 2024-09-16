@@ -16,9 +16,11 @@ module.exports = {
         extend: {
             fontFamily: {
                 sans: ["Figtree", ...defaultTheme.fontFamily.sans],
+                poppins: ["Poppins", 'sans-serif'],
+                roboto: ["Roboto", 'sans-serif'],
             },
             colors: {
-                primary: colors.rose,
+                primary: colors.red,
                 muted: colors.gray,
             },
         },
