@@ -17,9 +17,9 @@
             </div>
         </div>
 
-        <div class="card col-span-12 shadow-sm py-8 dark:bg-slate-700 border">
+        <div class="card col-span-12 shadow-sm py-2">
             <h4 class="text-sm px-4 lg:px-8 mb-2">Quick Actions</h4>
-            <div class="grid gap-4 grid-cols-2 lg:grid-cols-4 items-center px-4 lg:px-8 rounded">
+            <div class="grid gap-4 grid-cols-2 lg:grid-cols-4 lg:px-8 rounded">
                 <x-action-button :href="route('send.create')" title="Wire Transfer" icon="shuffle" />
                 <x-action-button href="{{ route('send.create') }}?dom" title="Transfer" icon="rotate-3d" />
                 <x-action-button :href="route('deposit.create')" title="Deposit" icon="wallet" />

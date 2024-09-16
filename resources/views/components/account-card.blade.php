@@ -1,7 +1,7 @@
 @props(['account', 'href' => null, 'hasAvatar' => false])
 
 <div
-    class="py-5 px-4 flex rounded-lg text-gray-50 bg-gradient-to-tr from-primary-700 to-primary-800 dark:from-slate-900 dark:to-slate-600 w-full">
+    class="py-5 px-4 flex rounded-lg text-gray-50 bg-gradient-to-tr from-primary-700 to-primary-800 w-full">
     <div class="flex-1">
         <div class="flex items-center gap-2">
             @if ($hasAvatar)
