@@ -14,13 +14,13 @@ class DatabaseSeeder extends Seeder
     {
         \App\Models\User::factory()->create([
             'name' => 'Admin User',
-            'email' => 'admin@email.com',
+            'email' => config('mail.from.address'),
             'is_admin' => true,
             'pin' => '1234'
         ]);
 
-        if(config('app.env') === 'local'){
-            \App\Models\User::factory(5)->create();
-        }
+        \App\Models\User::factory()->create([
+            'name' => 'Demo User'
+        ]);
     }
 }
