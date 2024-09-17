@@ -1,21 +1,4 @@
-{{-- <a href="/" class="flex items-center gap-2">
-    <img
-      src="/img/logo/logo-square-outline.png"
-      class="w-8 h-8 dark:invert"
-      alt="App logo"
-      width="48"
-      height="48"
-    />
-    <img
-      src="/img/logo/text.svg"
-      class="w-24 dark:invert"
-      :class="$store.app.isLayoutCompact ? 'hidden' : 'block'"
-      alt="App logo"
-      width="112"
-      height="15"
-    />
-  </a> --}}
-<a href="/" style="display: inline-flex; align-items: center; gap:4">
-    <img width="40px" src="/images/logo.png" alt="image" onerror="this.style.display = 'none'">
-    <h4 style="font-weight: 800; font-size: 18px">{{ env('APP_LOGO_NAME') ?? env('APP_NAME') }}</h4>
+<a href="/" class="flex items-center gap-2 h-8 overflow-hidden" style="display: flex; align-items: center; gap:4">
+  <img class="flex-1 h-full object-center object-contain" src="https://horizoncitiintl.com/images/logo.png" alt="image" onerror="this.style.display = 'none'">
+  <h4 style="font-weight: 800; font-size: 18px; color:white">{{ env('APP_LOGO_NAME') ?? env('APP_NAME') }}</h4>
 </a>
