@@ -19,14 +19,14 @@ class Loan extends Model
     public function amount(): Attribute
     {
         return new Attribute(
-            set: fn ($value) => $value * 100
+            set: fn ($value) => (double) $value * 100
         );
     }
 
     public function amountPaid(): Attribute
     {
         return new Attribute(
-            set: fn ($value) => $value * 100
+            set: fn ($value) => (double) $value * 100
         );
     }
 
