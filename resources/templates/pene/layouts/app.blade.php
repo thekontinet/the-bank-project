@@ -70,7 +70,7 @@
 <!-- Chatra {literal} -->
 <script>
     (function(d, w, c) {
-        w.ChatraID = env('CHATRA_ID');
+        w.ChatraID = "{{env('CHATRA_ID')}}";
         var s = d.createElement('script');
         w[c] = w[c] || function() {
             (w[c].q = w[c].q || []).push(arguments);
