@@ -41,7 +41,7 @@ class TransactionService
 
     public function transfer(
         Account $from,
-        int $amount,
+        string $amount,
         string $account_number,
         string $name,
         string $bank,
