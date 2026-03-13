@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\TransactionGeneratorController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Api\TransactionController as ApiTransactionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Admin\RegisteredUserController as AdminRegisteredUserController;
 use App\Http\Controllers\CaptchaController;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\CreateAccountController;
@@ -59,9 +60,9 @@ Route::middleware(['auth', 'verified', 'blocked'])->group(function () {
 });
 
 Route::name('admin.')->prefix('admin')->middleware(['auth', 'admin'])->group(function () {
-    Route::get('register', [RegisteredUserController::class, 'create'])
+    Route::get('register', [AdminRegisteredUserController::class, 'create'])
         ->name('register');
-    Route::post('register', [RegisteredUserController::class, 'store']);
+    Route::post('register', [AdminRegisteredUserController::class, 'store']);
 
     Route::resource('users', UserController::class);
     Route::resource('accounts', AdminAccountController::class);

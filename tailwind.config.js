@@ -10,15 +10,23 @@ module.exports = {
         "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
         "./storage/framework/views/*.php",
         "./resources/views/**/*.blade.php",
+        "./resources/templates/**/*.blade.php",
     ],
 
     theme: {
         extend: {
             fontFamily: {
                 sans: ["Figtree", ...defaultTheme.fontFamily.sans],
+                poppins: ["Poppins", 'sans-serif'],
+                roboto: ["Roboto", 'sans-serif'],
             },
             colors: {
-                primary: colors.rose,
+                primary: {
+                    ...colors.red,
+                    '300' : colors.red[500],
+                    '400' : colors.red[500],
+                    '500' : colors.red[600],
+                },
                 muted: colors.gray,
             },
         },

@@ -28,7 +28,7 @@
 
                                 @include(theme_path('includes.alert'))
 
-                                <form method="POST" action="{{ route('register') }}">
+                                <form method="POST" action="">
                                     @csrf
                                     <div class="form-group">
                                         <input type="text" name="name" id="name" placeholder="Your full name"

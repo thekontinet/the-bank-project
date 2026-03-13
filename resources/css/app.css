@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 @layer base {
+    body{
+        font-family: 'Poppins';
+        font-weight: 500;
+    }
+
     .note-modal-body .checkbox{
         @apply w-full
     }

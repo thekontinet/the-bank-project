@@ -32,6 +32,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'blocked',
         'pin',
         'need_kyc',
+        'email_verified_at',
     ];
 
     /**
